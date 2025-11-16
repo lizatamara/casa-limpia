@@ -7,7 +7,7 @@ Posteriormente, realicé **correcciones, mejoras y ajustes manuales utilizando D
 
 ## 🎓 Contexto académico
 
-Este proyecto forma parte de la **entrega final del ramo Ingeniería de Requisitos del Duoc**.
+Este proyecto forma parte de la **entrega final del ramo Ingeniería de Requisitos de la carrera de Ingeniería en Informática**.
 Toda la solución se diseñó a partir de los artefactos del curso: historias de usuario, flujos, criterios de aceptación y modelos funcionales.
 
 ---
