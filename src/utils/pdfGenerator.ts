@@ -1,162 +1,105 @@
+// src/utils/pdfGenerator.ts
 import { Booking, User } from '@/types';
 import { serviceTypes } from './mockData';
+import jsPDF from 'jspdf';
 
 export function generateInvoicePDF(booking: Booking, client: User, worker: User) {
-  // Create a simple HTML invoice
-  const invoiceHTML = `
-    <!DOCTYPE html>
-    <html>
-    <head>
-      <meta charset="UTF-8">
-      <title>Boleta - CasaLimpia</title>
-      <style>
-        body {
-          font-family: Arial, sans-serif;
-          max-width: 800px;
-          margin: 0 auto;
-          padding: 20px;
-        }
-        .header {
-          text-align: center;
-          border-bottom: 2px solid #333;
-          padding-bottom: 20px;
-          margin-bottom: 30px;
-        }
-        .header h1 {
-          color: #2563eb;
-          margin: 0;
-        }
-        .section {
-          margin-bottom: 25px;
-        }
-        .section h2 {
-          color: #333;
-          border-bottom: 1px solid #ddd;
-          padding-bottom: 10px;
-        }
-        .info-row {
-          display: flex;
-          justify-content: space-between;
-          padding: 8px 0;
-        }
-        .label {
-          font-weight: bold;
-          color: #666;
-        }
-        .total {
-          background: #f0f9ff;
-          padding: 15px;
-          margin-top: 20px;
-          border-radius: 5px;
-        }
-        .total-amount {
-          font-size: 24px;
-          font-weight: bold;
-          color: #2563eb;
-        }
-        .footer {
-          text-align: center;
-          margin-top: 40px;
-          padding-top: 20px;
-          border-top: 1px solid #ddd;
-          color: #666;
-          font-size: 12px;
-        }
-      </style>
-    </head>
-    <body>
-      <div class="header">
-        <h1>✨ CasaLimpia</h1>
-        <p>Boleta de Servicio</p>
-        <p><strong>N° ${booking.id}</strong></p>
-      </div>
+  try {
+    console.log('🔄 Iniciando generación de PDF...');
+    
+    const doc = new jsPDF();
+    const pageWidth = doc.internal.pageSize.getWidth();
+    let yPosition = 20;
 
-      <div class="section">
-        <h2>Información del Cliente</h2>
-        <div class="info-row">
-          <span class="label">Nombre:</span>
-          <span>${client.name}</span>
-        </div>
-        <div class="info-row">
-          <span class="label">Correo:</span>
-          <span>${client.email}</span>
-        </div>
-        <div class="info-row">
-          <span class="label">Teléfono:</span>
-          <span>${client.phone}</span>
-        </div>
-        <div class="info-row">
-          <span class="label">Dirección:</span>
-          <span>${booking.address}, ${booking.comuna}</span>
-        </div>
-      </div>
+    // Header
+    doc.setFontSize(20);
+    doc.setFont('helvetica', 'bold');
+    doc.text('✨ CasaLimpia', pageWidth / 2, yPosition, { align: 'center' });
+    
+    doc.setFontSize(12);
+    doc.setFont('helvetica', 'normal');
+    yPosition += 10;
+    doc.text('Boleta de Servicio', pageWidth / 2, yPosition, { align: 'center' });
+    
+    yPosition += 8;
+    doc.setFontSize(10);
+    doc.text(`N° ${booking.id}`, pageWidth / 2, yPosition, { align: 'center' });
 
-      <div class="section">
-        <h2>Información del Trabajador</h2>
-        <div class="info-row">
-          <span class="label">Nombre:</span>
-          <span>${worker.name}</span>
-        </div>
-        <div class="info-row">
-          <span class="label">Razón Social:</span>
-          <span>${worker.businessName || 'N/A'}</span>
-        </div>
-        <div class="info-row">
-          <span class="label">Nombre Comercial:</span>
-          <span>${worker.commercialName || 'N/A'}</span>
-        </div>
-        <div class="info-row">
-          <span class="label">Correo Tributario:</span>
-          <span>${worker.taxEmail || 'N/A'}</span>
-        </div>
-      </div>
+    // Información del Cliente
+    yPosition += 20;
+    doc.setFontSize(14);
+    doc.setFont('helvetica', 'bold');
+    doc.text('INFORMACIÓN DEL CLIENTE', 20, yPosition);
+    
+    doc.setFontSize(10);
+    doc.setFont('helvetica', 'normal');
+    yPosition += 8;
+    doc.text(`Nombre: ${client.name}`, 20, yPosition);
+    yPosition += 6;
+    doc.text(`Correo: ${client.email}`, 20, yPosition);
+    yPosition += 6;
+    doc.text(`Teléfono: ${client.phone}`, 20, yPosition);
+    yPosition += 6;
+    doc.text(`Dirección: ${booking.address}, ${booking.comuna}`, 20, yPosition);
 
-      <div class="section">
-        <h2>Detalles del Servicio</h2>
-        <div class="info-row">
-          <span class="label">Tipo de Servicio:</span>
-          <span>${serviceTypes[booking.serviceType]}</span>
-        </div>
-        <div class="info-row">
-          <span class="label">Fecha:</span>
-          <span>${new Date(booking.date).toLocaleDateString('es-CL')}</span>
-        </div>
-        <div class="info-row">
-          <span class="label">Horario:</span>
-          <span>${booking.timeSlot.startTime} - ${booking.timeSlot.endTime}</span>
-        </div>
-        ${booking.clientNotes ? `
-        <div class="info-row">
-          <span class="label">Notas:</span>
-          <span>${booking.clientNotes}</span>
-        </div>
-        ` : ''}
-      </div>
+    // Información del Trabajador
+    yPosition += 15;
+    doc.setFontSize(14);
+    doc.setFont('helvetica', 'bold');
+    doc.text('INFORMACIÓN DEL TRABAJADOR', 20, yPosition);
+    
+    doc.setFontSize(10);
+    doc.setFont('helvetica', 'normal');
+    yPosition += 8;
+    doc.text(`Nombre: ${worker.name}`, 20, yPosition);
+    yPosition += 6;
+    doc.text(`Razón Social: ${worker.businessName || 'N/A'}`, 20, yPosition);
+    yPosition += 6;
+    doc.text(`Nombre Comercial: ${worker.commercialName || 'N/A'}`, 20, yPosition);
 
-      <div class="total">
-        <div class="info-row">
-          <span class="label">TOTAL A PAGAR:</span>
-          <span class="total-amount">$${booking.price.toLocaleString('es-CL')}</span>
-        </div>
-      </div>
+    // Detalles del Servicio
+    yPosition += 15;
+    doc.setFontSize(14);
+    doc.setFont('helvetica', 'bold');
+    doc.text('DETALLES DEL SERVICIO', 20, yPosition);
+    
+    doc.setFontSize(10);
+    doc.setFont('helvetica', 'normal');
+    yPosition += 8;
+    doc.text(`Servicio: ${serviceTypes[booking.serviceType]}`, 20, yPosition);
+    yPosition += 6;
+    doc.text(`Fecha: ${new Date(booking.date).toLocaleDateString('es-CL')}`, 20, yPosition);
+    yPosition += 6;
+    doc.text(`Horario: ${booking.timeSlot.startTime} - ${booking.timeSlot.endTime}`, 20, yPosition);
+    
+    if (booking.clientNotes) {
+      yPosition += 6;
+      doc.text(`Notas: ${booking.clientNotes}`, 20, yPosition);
+    }
 
-      <div class="footer">
-        <p>Gracias por confiar en CasaLimpia</p>
-        <p>Este documento es una boleta electrónica válida</p>
-        <p>Fecha de emisión: ${new Date().toLocaleString('es-CL')}</p>
-      </div>
-    </body>
-    </html>
-  `;
+    // Total
+    yPosition += 15;
+    doc.setFontSize(16);
+    doc.setFont('helvetica', 'bold');
+    doc.text('TOTAL A PAGAR:', 20, yPosition);
+    doc.text(`$${booking.price.toLocaleString('es-CL')}`, pageWidth - 20, yPosition, { align: 'right' });
 
-  // Create a blob and download
-  const blob = new Blob([invoiceHTML], { type: 'text/html' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `boleta-${booking.id}.html`;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
+    // Footer
+    yPosition += 20;
+    doc.setFontSize(8);
+    doc.setFont('helvetica', 'normal');
+    doc.text('Gracias por confiar en CasaLimpia', pageWidth / 2, yPosition, { align: 'center' });
+    yPosition += 4;
+    doc.text('Este documento es una boleta electrónica válida', pageWidth / 2, yPosition, { align: 'center' });
+    yPosition += 4;
+    doc.text(`Fecha de emisión: ${new Date().toLocaleString('es-CL')}`, pageWidth / 2, yPosition, { align: 'center' });
+
+    // Guardar PDF
+    console.log('💾 Guardando PDF...');
+    doc.save(`boleta-${booking.id}.pdf`);
+    console.log('✅ PDF generado exitosamente!');
+    
+  } catch (error) {
+    console.error('❌ Error generando PDF:', error);
+  }
 }

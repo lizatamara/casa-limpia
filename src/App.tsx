@@ -24,6 +24,7 @@ import WorkerProfileView from "./pages/client/WorkerProfileView";
 import BookingForm from "./pages/client/BookingForm";
 import PaymentSimulation from "./pages/client/PaymentSimulation";
 import ClientBookings from "./pages/client/ClientBookings";
+import PaymentConfirmation from './pages/client/PaymentConfirmation';
 
 // Admin pages
 import AdminDashboard from "./pages/admin/AdminDashboard";
@@ -61,6 +62,7 @@ const App = () => (
             <Route path="/client/booking/:workerId" element={<BookingForm />} />
             <Route path="/client/payment" element={<PaymentSimulation />} />
             <Route path="/client/bookings" element={<ClientBookings />} />
+            <Route path="/client/payment-confirmation" element={<PaymentConfirmation />} />
 
             {/* Admin routes */}
             <Route path="/admin/dashboard" element={<AdminDashboard />} />

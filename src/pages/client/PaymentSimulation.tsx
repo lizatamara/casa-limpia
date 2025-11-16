@@ -10,7 +10,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/hooks/use-toast";
 import { appState, serviceTypes } from "@/utils/mockData";
 import { Booking, Payment } from "@/types";
-import { generateInvoicePDF } from "@/utils/pdfGenerator";
+import { generateInvoice } from "@/utils/pdfGenerator";
 
 const PaymentSimulation = () => {
   const navigate = useNavigate();
@@ -80,21 +80,16 @@ const PaymentSimulation = () => {
     // Get worker data for PDF
     const worker = appState.users[bookingData.workerId];
 
-    // Generate and download PDF
-    if (user && worker) {
-      generateInvoicePDF(newBooking, user, worker);
-    }
-
     setIsProcessing(false);
 
-    toast({
-      title: "¡Pago exitoso!",
-      description: "Tu reserva ha sido confirmada y el trabajador ha sido notificado",
+    navigate('/client/payment-confirmation', {
+      state: {
+        paymentData: {
+        bookingId: newBooking.id,
+        paymentId: newPayment.id
+        }
+      }
     });
-
-    setTimeout(() => {
-      navigate('/client/dashboard');
-    }, 1500);
   };
 
   return (
@@ -157,9 +152,6 @@ const PaymentSimulation = () => {
                 <CreditCard className="h-5 w-5" />
                 Información de Pago
               </CardTitle>
-              <p className="text-sm text-muted-foreground">
-                Esta es una simulación - usa cualquier dato
-              </p>
             </CardHeader>
             <CardContent>
               <form onSubmit={handlePayment} className="space-y-4">
@@ -217,18 +209,6 @@ const PaymentSimulation = () => {
                     </div>
                   </>
                 )}
-
-                <div className="bg-muted p-4 rounded-lg space-y-2">
-                  <p className="text-sm font-medium flex items-center gap-2">
-                    <Download className="h-4 w-4" />
-                    Al confirmar el pago:
-                  </p>
-                  <ul className="text-sm text-muted-foreground space-y-1 ml-6 list-disc">
-                    <li>Se procesará tu pago de forma simulada</li>
-                    <li>Se notificará al trabajador de tu reserva</li>
-                    <li>Podrás descargar tu boleta en formato HTML</li>
-                  </ul>
-                </div>
 
                 <Button
                   type="submit"
