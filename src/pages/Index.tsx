@@ -48,7 +48,7 @@ const Index = () => {
                   Buscar Servicio de Limpieza
                </Button>
               </Link>
-              <Link to="/auth?tab=signup" className="w-full sm:w-auto">  {/* ← AGREGAR ?tab=signup */}
+              <Link to="/auth?tab=signup&type=worker" className="w-full sm:w-auto">
                 <Button size="lg" variant="outline" className="w-full text-lg py-6 border-2">
                   Ofrecer Mis Servicios
                 </Button>

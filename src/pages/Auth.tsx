@@ -21,7 +21,14 @@ const Auth = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const defaultTab = searchParams.get('tab') === 'signup' ? 'signup' : 'login';
+  //const location = useLocation();
 
+  useEffect(() => {
+    const userTypeParam = searchParams.get('type');
+    if (userTypeParam === 'worker') {
+      setUserType('worker');
+    }
+  }, [searchParams]);
 
   // Redirect if already logged in
   useEffect(() => {
