@@ -114,35 +114,37 @@ const PaymentSimulation = () => {
               <CardTitle>Resumen de la Reserva</CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Trabajador:</span>
-                <span className="font-medium">{bookingData.workerName}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Servicio:</span>
-                <span className="font-medium">{serviceTypes[bookingData.serviceType]}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Fecha:</span>
-                <span className="font-medium">{new Date(bookingData.date).toLocaleDateString('es-CL')}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Horario:</span>
-                <span className="font-medium">
-                  {bookingData.timeSlot.startTime} - {bookingData.timeSlot.endTime}
-                </span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Dirección:</span>
-                <span className="font-medium">{bookingData.address}, {bookingData.comuna}</span>
-              </div>
-              <div className="flex justify-between pt-3 border-t">
-                <span className="font-semibold text-lg">Total a Pagar:</span>
-                <span className="font-bold text-2xl text-primary">
-                  ${bookingData.price.toLocaleString('es-CL')}
-                </span>
-              </div>
-            </CardContent>
+  <div className="grid grid-cols-3 gap-4 items-center">
+    <span className="text-muted-foreground col-span-1">Trabajador:</span>
+    <span className="font-medium col-span-2 text-right">{bookingData.workerName}</span>
+  </div>
+  <div className="grid grid-cols-3 gap-4 items-center">
+    <span className="text-muted-foreground col-span-1">Servicio:</span>
+    <span className="font-medium col-span-2 text-right">{serviceTypes[bookingData.serviceType]}</span>
+  </div>
+  <div className="grid grid-cols-3 gap-4 items-center">
+    <span className="text-muted-foreground col-span-1">Fecha:</span>
+    <span className="font-medium col-span-2 text-right">{new Date(bookingData.date).toLocaleDateString('es-CL')}</span>
+  </div>
+  <div className="grid grid-cols-3 gap-4 items-center">
+    <span className="text-muted-foreground col-span-1">Horario:</span>
+    <span className="font-medium col-span-2 text-right">
+      {bookingData.timeSlot.startTime} - {bookingData.timeSlot.endTime}
+    </span>
+  </div>
+  <div className="grid grid-cols-3 gap-4 items-start">
+    <span className="text-muted-foreground col-span-1">Dirección:</span>
+    <span className="font-medium col-span-2 text-right break-words">
+      {bookingData.address}, {bookingData.comuna}
+    </span>
+  </div>
+  <div className="grid grid-cols-3 gap-4 items-center pt-3 border-t">
+    <span className="font-semibold text-lg col-span-2">Total a Pagar:</span>
+    <span className="font-bold text-2xl text-primary text-right">
+      ${bookingData.price.toLocaleString('es-CL')}
+    </span>
+  </div>
+</CardContent>
           </Card>
 
           {/* Payment Form */}
