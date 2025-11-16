@@ -68,24 +68,7 @@ const WorkerAvailability = () => {
             </p>
           </CardHeader>
           <CardContent className="space-y-6">
-            {/* Month Navigation */}
-            <div className="flex justify-between items-center">
-              <Button
-                variant="outline"
-                onClick={() => setCurrentMonth(addMonths(currentMonth, -1))}
-              >
-                ← Mes Anterior
-              </Button>
-              <h3 className="text-lg font-semibold">
-                {format(currentMonth, 'MMMM yyyy', { locale: es })}
-              </h3>
-              <Button
-                variant="outline"
-                onClick={() => setCurrentMonth(addMonths(currentMonth, 1))}
-              >
-                Mes Siguiente →
-              </Button>
-            </div>
+          
 
             {/* Calendar */}
             <div className="flex justify-center">
