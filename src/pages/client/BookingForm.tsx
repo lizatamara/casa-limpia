@@ -8,8 +8,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ArrowLeft } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
-import { mockWorkers, mockRates, serviceTypes } from "@/utils/mockData";
+import { mockWorkers, mockRates, serviceTypes, comunas } from "@/utils/mockData";
 import { ServiceType } from "@/types";
+import { DatePicker } from "@/components/ui/date-picker";
 
 const BookingForm = () => {
   const { workerId } = useParams();
@@ -119,9 +120,10 @@ const BookingForm = () => {
                   <Input
                     id="date"
                     type="date"
-                    value={date}
+                    value={date === "all" ? "" : date}
                     onChange={(e) => setDate(e.target.value)}
                     required
+                     className="[color-scheme:light] touch-manipulation cursor-pointer"
                   />
                 </div>
 
@@ -150,13 +152,18 @@ const BookingForm = () => {
 
               <div className="space-y-2">
                 <Label htmlFor="comuna">Comuna *</Label>
-                <Input
-                  id="comuna"
-                  value={comuna}
-                  onChange={(e) => setComuna(e.target.value)}
-                  placeholder="Providencia"
-                  required
-                />
+                <Select value={comuna} onValueChange={setComuna} required>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Selecciona tu comuna" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {comunas.map((comuna) => (
+                      <SelectItem key={comuna} value={comuna}>
+                        {comuna}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
 
               <div className="space-y-2">

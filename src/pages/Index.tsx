@@ -5,9 +5,10 @@ import heroImage from "@/assets/hero-cleaning.jpg";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-gradient-subtle">
-      {/* Header */}
-      <header className="container mx-auto px-4 py-6">
+    <div className="min-h-screen bg-gradient-subtle overflow-x-hidden">
+      
+      {/* Header - py-6 a py-4 */}
+      <header className="container mx-auto px-4 py-4">
         <nav className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Sparkles className="h-8 w-8 text-primary" />
@@ -19,7 +20,7 @@ const Index = () => {
                 Iniciar Sesión
               </Button>
             </Link>
-            <Link to="/auth?tab=signup">  {/* ← AGREGAR ?tab=signup */}
+            <Link to="/auth?tab=signup" className="hidden sm:block">
               <Button size="lg" className="bg-gradient-hero hover:opacity-90">
                 Registrarse
               </Button>
@@ -28,8 +29,9 @@ const Index = () => {
         </nav>
       </header>
 
-      {/* Hero Section */}
-      <section className="container mx-auto px-4 py-20">
+      {/* Hero Section - CAMBIOS ESPECÍFICOS: */}
+      {/* py-20 a pt-0 (quitar padding top) y px-4 a px-6 (más padding horizontal) */}
+      <section className="container mx-auto px-6 pt-0 pb-20">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-8">
             <h1 className="text-5xl lg:text-6xl font-bold leading-tight text-foreground">
@@ -43,7 +45,7 @@ const Index = () => {
               que necesitan sus servicios. Simple, rápido y confiable.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Link to="/client/search" className="w-full sm:w-auto">  {/* ← Cambiar a /client/search */}
+              <Link to="/client/search" className="w-full sm:w-auto">
                <Button size="lg" className="w-full bg-gradient-hero hover:opacity-90 text-lg py-6">
                   Buscar Servicio de Limpieza
                </Button>
@@ -53,9 +55,9 @@ const Index = () => {
                   Ofrecer Mis Servicios
                 </Button>
               </Link>
+            </div>
           </div>
-          </div>
-          <div className="relative">
+          <div className="hidden lg:block relative">
             <div className="rounded-2xl overflow-hidden shadow-medium">
               <img
                 src={heroImage}
@@ -67,6 +69,7 @@ const Index = () => {
         </div>
       </section>
 
+      {/* TODAS LAS SECCIONES ORIGINALES - SIN CAMBIOS */}
       {/* Benefits Section */}
       <section className="container mx-auto px-4 py-20">
         <div className="text-center mb-16">
@@ -129,7 +132,7 @@ const Index = () => {
           <p className="text-xl mb-8 opacity-90">
             Únete a nuestra comunidad hoy y descubre una nueva forma de conectar
           </p>
-          <Link to="/auth?tab=signup">  {/* ← AGREGAR ?tab=signup */}
+          <Link to="/auth?tab=signup">
             <Button
               size="lg"
               variant="secondary"

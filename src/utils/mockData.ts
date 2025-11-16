@@ -3,7 +3,7 @@ import { WorkerProfile, ServiceRate, Availability, Booking, Review, Payment, Use
 // Comunas de Santiago
 export const comunas = [
   'Santiago', 'Providencia', 'Las Condes', 'Vitacura', 'Ñuñoa',
-  'La Reina', 'Macul', 'Peñalolén', 'La Florida', 'San Miguel',
+  'La Reina', 'Macul', 'Peñalolén', 'La Florida', 'Puente Alto', 'San Miguel',
   'Maipú', 'Pudahuel', 'Cerrillos', 'Estación Central', 'Independencia'
 ];
 
