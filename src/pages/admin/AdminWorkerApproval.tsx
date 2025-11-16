@@ -64,17 +64,17 @@ export default function AdminWorkerApproval() {
         ) : (
           <div className="space-y-6">
             {pendingWorkers.map((worker) => (
-              <Card key={worker.id}>
+              <Card key={worker.id} className="overflow-hidden">
                 <CardHeader>
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <CardTitle>{worker.name}</CardTitle>
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3">
+                    <div className="flex-1">
+                      <CardTitle className="text-lg">{worker.name}</CardTitle>
                       <CardDescription className="mt-2">
                         {worker.commercialName && `${worker.commercialName} • `}
                         {worker.experience} de experiencia
                       </CardDescription>
                     </div>
-                    <Badge variant="outline">Pendiente</Badge>
+                    <Badge variant="outline" className="self-start sm:self-auto">Pendiente</Badge>
                   </div>
                 </CardHeader>
                 <CardContent className="space-y-6">
@@ -83,16 +83,16 @@ export default function AdminWorkerApproval() {
                     <h3 className="font-semibold mb-3 text-sm">Información de Contacto</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
                       <div className="flex items-center gap-2">
-                        <Mail className="h-4 w-4 text-muted-foreground" />
-                        <span>{worker.email}</span>
+                        <Mail className="h-4 w-4 text-muted-foreground flex-shrink-0" />
+                        <span className="break-words">{worker.email}</span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <Phone className="h-4 w-4 text-muted-foreground" />
+                        <Phone className="h-4 w-4 text-muted-foreground flex-shrink-0" />
                         <span>{worker.phone}</span>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <MapPin className="h-4 w-4 text-muted-foreground" />
-                        <span>{worker.address}, {worker.comuna}</span>
+                      <div className="flex items-center gap-2 md:col-span-2">
+                        <MapPin className="h-4 w-4 text-muted-foreground flex-shrink-0" />
+                        <span className="break-words">{worker.address}, {worker.comuna}</span>
                       </div>
                     </div>
                   </div>
@@ -103,19 +103,19 @@ export default function AdminWorkerApproval() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
                       <div>
                         <span className="text-muted-foreground">Razón Social:</span>
-                        <p className="font-medium">{worker.businessName}</p>
+                        <p className="font-medium break-words">{worker.businessName}</p>
                       </div>
                       <div>
                         <span className="text-muted-foreground">Nombre Comercial:</span>
-                        <p className="font-medium">{worker.commercialName}</p>
+                        <p className="font-medium break-words">{worker.commercialName}</p>
                       </div>
                       <div>
                         <span className="text-muted-foreground">Dirección Tributaria:</span>
-                        <p className="font-medium">{worker.taxAddress}, {worker.taxComuna}</p>
+                        <p className="font-medium break-words">{worker.taxAddress}, {worker.taxComuna}</p>
                       </div>
                       <div>
                         <span className="text-muted-foreground">Email Tributario:</span>
-                        <p className="font-medium">{worker.taxEmail}</p>
+                        <p className="font-medium break-words">{worker.taxEmail}</p>
                       </div>
                     </div>
                   </div>
@@ -123,18 +123,18 @@ export default function AdminWorkerApproval() {
                   {/* Perfil Profesional */}
                   <div>
                     <h3 className="font-semibold mb-3 text-sm">Perfil Profesional</h3>
-                    <p className="text-sm text-muted-foreground mb-2">{worker.bio}</p>
+                    <p className="text-sm text-muted-foreground mb-2 break-words">{worker.bio}</p>
                     <div className="flex items-center gap-2 text-sm">
-                      <Briefcase className="h-4 w-4 text-muted-foreground" />
+                      <Briefcase className="h-4 w-4 text-muted-foreground flex-shrink-0" />
                       <span>Experiencia: {worker.experience}</span>
                     </div>
                   </div>
 
-                  {/* Acciones */}
-                  <div className="flex gap-3 pt-4 border-t">
+                  {/* Acciones - Botones con altura intermedia */}
+                  <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t">
                     <Button
                       onClick={() => handleApprove(worker.id)}
-                      className="flex-1"
+                      className="flex-1 py-2.5"
                     >
                       <CheckCircle className="mr-2 h-4 w-4" />
                       Aprobar Trabajador
@@ -142,7 +142,7 @@ export default function AdminWorkerApproval() {
                     <Button
                       onClick={() => handleReject(worker.id)}
                       variant="destructive"
-                      className="flex-1"
+                      className="flex-1 py-2.5"
                     >
                       <XCircle className="mr-2 h-4 w-4" />
                       Rechazar
