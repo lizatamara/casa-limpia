@@ -41,7 +41,36 @@ const App = () => (
     <TooltipProvider>
       <AuthProvider>
         <Toaster />
-        <Sonner />
+         <Sonner 
+          position="bottom-right"
+          expand={false}
+          closeButton={false}
+          duration={2000}
+          toastOptions={{
+            style: {
+              border: '1px solid #22c55e', // Borde verde delgado
+              background: 'white', // Fondo blanco
+              color: 'hsl(240 10% 3.9%)', // Color de texto oscuro (como antes)
+              fontWeight: 500,
+            },
+            success: {
+              style: {
+                border: '1px solid #22c55e', // Verde para éxito
+                background: 'white',
+                color: 'hsl(240 10% 3.9%)',
+              },
+              icon: <div style={{ color: '#22c55e' }}>✓</div>, // Ícono verde personalizado
+            },
+            error: {
+              style: {
+                border: '1px solid #ef4444', // Rojo para error
+                background: 'white',
+                color: 'hsl(240 10% 3.9%)',
+              },
+              icon: <div style={{ color: '#ef4444' }}>✕</div>, // Ícono rojo personalizado
+            },
+          }}
+        />
         <BrowserRouter>
         <ScrollToTop />
           <Routes>

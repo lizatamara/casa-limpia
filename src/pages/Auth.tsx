@@ -8,7 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Link, useNavigate } from "react-router-dom";
 import { Sparkles } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
+import { toast } from "sonner";
 import { useAuth } from "@/contexts/AuthContext";
 import { comunas } from "@/utils/mockData";
 import { UserRole } from "@/types";
@@ -16,7 +16,6 @@ import { UserRole } from "@/types";
 const Auth = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [userType, setUserType] = useState<UserRole>('client');
-  const { toast } = useToast();
   const { login, signup, user } = useAuth();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -56,10 +55,8 @@ const Auth = () => {
     setIsLoading(false);
     
     if (result.success && result.user) {
-      toast({
-        title: "Inicio de sesión exitoso",
-        description: "Bienvenido a CasaLimpia",
-      });
+      toast.success('Inicio de sesión exitoso');
+
 
     //const currentUser = user;    
     if (result.user.role === 'admin') {
@@ -71,11 +68,7 @@ const Auth = () => {
     }
 
     } else {
-      toast({
-        title: "Error",
-        description: result.error,
-        variant: "destructive"
-      });
+      toast.error(result.error || 'Error al iniciar sesión');
     }
   };
 
@@ -106,16 +99,9 @@ const Auth = () => {
     setIsLoading(false);
     
     if (result.success) {
-      toast({
-        title: "Registro exitoso",
-        description: "Tu cuenta ha sido creada correctamente",
-      });
+      toast.success('Tu cuenta ha sido creada correctamente');
     } else {
-      toast({
-        title: "Error",
-        description: result.error,
-        variant: "destructive"
-      });
+      toast.error(result.error || 'Error al crear la cuenta');
     }
   };
 
