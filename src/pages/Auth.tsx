@@ -25,7 +25,9 @@ const Auth = () => {
 
   // Redirect if already logged in
   useEffect(() => {
+    console.log('🔍 Auth - user changed:', user);
     if (user) {
+      console.log('🔍 Auth - redirecting user with role:', user.role);
       if (user.role === 'worker') {
         navigate('/worker/dashboard');
       } else if (user.role === 'client') {
@@ -46,11 +48,21 @@ const Auth = () => {
     
     setIsLoading(false);
     
-    if (result.success) {
+    if (result.success && result.user) {
       toast({
         title: "Inicio de sesión exitoso",
         description: "Bienvenido a CasaLimpia",
       });
+
+    //const currentUser = user;    
+    if (result.user.role === 'admin') {
+      navigate('/admin/dashboard');
+    } else if (result.user.role === 'worker') {
+      navigate('/worker/dashboard');
+    } else {
+      navigate('/client/dashboard');
+    }
+
     } else {
       toast({
         title: "Error",

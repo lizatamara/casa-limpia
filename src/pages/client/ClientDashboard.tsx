@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -7,7 +7,11 @@ import { appState } from "@/utils/mockData";
 
 const ClientDashboard = () => {
   const { user, logout } = useAuth();
-  
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    logout();
+    navigate('/auth');
+  };
   const myBookings = appState.bookings.filter(b => b.clientId === user?.id);
   const pendingBookings = myBookings.filter(b => b.status === 'pending').length;
   const acceptedBookings = myBookings.filter(b => b.status === 'accepted').length;
@@ -19,7 +23,7 @@ const ClientDashboard = () => {
       <div className="bg-card border-b sticky top-0 z-10">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <h1 className="text-2xl font-bold text-primary">CasaLimpia</h1>
-          <Button variant="ghost" size="sm" onClick={logout}>
+          <Button variant="ghost" size="sm" onClick={handleLogout}>
             <LogOut className="h-4 w-4 mr-2" />
             Salir
           </Button>

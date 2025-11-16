@@ -5,7 +5,7 @@ import { appState } from '../utils/mockData';
 
 interface AuthContextType {
   user: User | null;
-  login: (email: string, password: string) => Promise<{ success: boolean; error?: string }>;
+  login: (email: string, password: string) => Promise<{ success: boolean; error?: string; user?: User; }>;
   signup: (userData: Partial<User> & { password: string }) => Promise<{ success: boolean; error?: string }>;
   logout: () => void;
   isLoading: boolean;
@@ -30,25 +30,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   // Simulación de login
   await new Promise(resolve => setTimeout(resolve, 500));
 
-  console.log('🔍 === INICIANDO LOGIN ===');
-  console.log('📧 Email recibido:', email);
-  console.log('📦 appState:', appState);
-  console.log('👥 appState.users:', appState?.users);
-  
   const foundUser = Object.values(appState.users).find(u => u.email === email);
   
-  console.log('✅ Usuario encontrado?:', foundUser);
-  console.log('🔎 Emails en appState.users:', Object.values(appState.users).map(u => u.email));
-  
   if (!foundUser) {
-    console.log('❌ ERROR: Usuario no encontrado');
+    
     return { success: false, error: 'Usuario no encontrado' };
   }
 
-  console.log('🎉 LOGIN EXITOSO:', foundUser.name);
   setUser(foundUser);
   localStorage.setItem('casalimpia_user', JSON.stringify(foundUser));
-  return { success: true };
+  return { success: true, user: foundUser };
 };
 
   /*const login = async (email: string, password: string) => {

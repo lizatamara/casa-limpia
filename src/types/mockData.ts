@@ -40,6 +40,15 @@ export const mockUsers: Record<string, User> = {
     taxAddress: 'Los Leones 567, Oficina 12',
     taxComuna: 'Providencia',
     taxEmail: 'facturacion@cleanpro.cl'
+  },
+  'admin-1': {
+  id: 'admin-1',
+  email: 'admin@casalimpia.com',
+  role: 'admin',
+  name: 'Administrador CasaLimpia',
+  phone: '+56 9 9999 9999',
+  address: 'Oficina Central',
+  comuna: 'Santiago'
   }
 };
 
@@ -63,7 +72,8 @@ export const mockWorkers: WorkerProfile[] = [
     rating: 4.8,
     reviewCount: 45,
     isAvailable: true,
-    isPaused: false
+    isPaused: false,
+    isApproved: true 
   },
   {
     id: 'worker-2',
@@ -83,7 +93,8 @@ export const mockWorkers: WorkerProfile[] = [
     rating: 4.9,
     reviewCount: 67,
     isAvailable: true,
-    isPaused: false
+    isPaused: false,
+    isApproved: true 
   },
   {
     id: 'worker-3',
@@ -103,7 +114,8 @@ export const mockWorkers: WorkerProfile[] = [
     rating: 5.0,
     reviewCount: 89,
     isAvailable: true,
-    isPaused: false
+    isPaused: false,
+    isApproved: true 
   }
 ];
 

@@ -40,6 +40,16 @@ export const mockUsers: Record<string, User> = {
     taxAddress: 'Los Leones 567, Oficina 12',
     taxComuna: 'Providencia',
     taxEmail: 'facturacion@cleanpro.cl'
+  },
+  'admin-1': {
+    id: 'admin-1',
+    email: 'admin@casalimpia.cl',
+    role: 'admin',
+    name: 'Administrador CasaLimpia',
+    phone: '+56 9 9999 9999',
+    address: 'Oficina Central',
+    comuna: 'Santiago',
+    //isSuspended: false
   }
 };
 

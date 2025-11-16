@@ -32,6 +32,7 @@ export interface WorkerProfile extends User {
   profileImage?: string;
   isAvailable: boolean;
   isPaused: boolean;
+  isApproved: boolean;
 }
 
 export interface ServiceRate {

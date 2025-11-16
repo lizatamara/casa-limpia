@@ -25,6 +25,13 @@ import BookingForm from "./pages/client/BookingForm";
 import PaymentSimulation from "./pages/client/PaymentSimulation";
 import ClientBookings from "./pages/client/ClientBookings";
 
+// Admin pages
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminWorkerApproval from "./pages/admin/AdminWorkerApproval";
+import AdminUsers from "./pages/admin/AdminUsers";
+import AdminBookings from "./pages/admin/AdminBookings";
+import AdminReports from "./pages/admin/AdminReports";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -54,6 +61,13 @@ const App = () => (
             <Route path="/client/booking/:workerId" element={<BookingForm />} />
             <Route path="/client/payment" element={<PaymentSimulation />} />
             <Route path="/client/bookings" element={<ClientBookings />} />
+
+            {/* Admin routes */}
+            <Route path="/admin/dashboard" element={<AdminDashboard />} />
+            <Route path="/admin/worker-approval" element={<AdminWorkerApproval />} />
+            <Route path="/admin/users" element={<AdminUsers />} />
+            <Route path="/admin/bookings" element={<AdminBookings />} />
+            <Route path="/admin/reports" element={<AdminReports />} />
             
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
