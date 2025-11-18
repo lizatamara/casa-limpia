@@ -689,7 +689,137 @@ export const mockReviews: Review[] = [
 // Nuevos datos para funcionalidades adicionales
 export const mockRecurringBookings: RecurringBooking[] = [];
 
-export const mockMessages: Message[] = [];
+export const mockMessages: Message[] = [
+  // Chat para booking-001 (Aceptada - puede chatear)
+  {
+    id: 'msg-1',
+    bookingId: 'booking-001',
+    senderId: 'client-1',
+    senderName: 'María González',
+    senderRole: 'client',
+    message: 'Hola, quería confirmar si necesitas que compre algún producto de limpieza específico para los pisos de madera.',
+    timestamp: '2025-11-18T10:30:00Z',
+    read: true
+  },
+  {
+    id: 'msg-2',
+    bookingId: 'booking-001',
+    senderId: 'worker-1',
+    senderName: 'Ana Silva',
+    senderRole: 'worker',
+    message: 'Hola María! No te preocupes, yo llevo todos los productos necesarios. Tengo un limpiador especial para pisos de madera.',
+    timestamp: '2025-11-18T10:35:00Z',
+    read: true
+  },
+  {
+    id: 'msg-3',
+    bookingId: 'booking-001',
+    senderId: 'client-1',
+    senderName: 'María González',
+    senderRole: 'client',
+    message: 'Perfecto, gracias! ¿Necesitas que te espere en la portería o tienes llave?',
+    timestamp: '2025-11-18T10:40:00Z',
+    read: false
+  },
+
+  // Chat para booking-003 (Aceptada)
+  {
+    id: 'msg-4',
+    bookingId: 'booking-003',
+    senderId: 'client-3',
+    senderName: 'Ana Rodríguez',
+    senderRole: 'client',
+    message: 'Hola! El departamento es de 3 dormitorios y está recién entregado, así que hay bastante polvo de construcción.',
+    timestamp: '2025-11-18T09:15:00Z',
+    read: true
+  },
+  {
+    id: 'msg-5',
+    bookingId: 'booking-003',
+    senderId: 'worker-1',
+    senderName: 'Ana Silva',
+    senderRole: 'worker',
+    message: 'Entendido, Ana. Para limpieza post-obra recomiendo llevar mascarilla y voy a necesitar acceso a agua. ¿Está conectada el agua ya?',
+    timestamp: '2025-11-18T09:20:00Z',
+    read: true
+  },
+
+  // Chat para booking-005 (En progreso)
+  {
+    id: 'msg-6',
+    bookingId: 'booking-005',
+    senderId: 'client-11',
+    senderName: 'Elena Morales',
+    senderRole: 'client',
+    message: 'Buenos días! Solo recordarte que hoy tenemos la limpieza profunda. Estaré en casa hasta las 9:30, luego salgo pero puedes seguir trabajando.',
+    timestamp: '2025-12-01T07:45:00Z',
+    read: true
+  },
+  {
+    id: 'msg-7',
+    bookingId: 'booking-005',
+    senderId: 'worker-1',
+    senderName: 'Ana Silva',
+    senderRole: 'worker',
+    message: 'Buenos días Elena! Perfecto, llegaré puntual a las 8:00. ¿Puedes dejarme la llave con el portero si sales antes?',
+    timestamp: '2025-12-01T07:50:00Z',
+    read: true
+  },
+  {
+    id: 'msg-8',
+    bookingId: 'booking-005',
+    senderId: 'client-11',
+    senderName: 'Elena Morales',
+    senderRole: 'client',
+    message: 'Sí, claro! Ya avisé en portería que pasarás. Las llaves estarán en recepción.',
+    timestamp: '2025-12-01T07:55:00Z',
+    read: false
+  },
+
+  // Chat para booking-007 (Completada - ya calificada)
+  {
+    id: 'msg-9',
+    bookingId: 'booking-007',
+    senderId: 'client-7',
+    senderName: 'Claudia Rojas',
+    senderRole: 'client',
+    message: 'Hola! Solo recordarte que mi gato es muy tranquilo pero si ves que te molesta, puedes encerrarlo en el dormitorio.',
+    timestamp: '2025-11-12T08:30:00Z',
+    read: true
+  },
+  {
+    id: 'msg-10',
+    bookingId: 'booking-007',
+    senderId: 'worker-1',
+    senderName: 'Ana Silva',
+    senderRole: 'worker',
+    message: 'Hola Claudia! No te preocupes, estoy acostumbrada a trabajar con mascotas. Mientras no se asuste con la aspiradora, todo bien 😊',
+    timestamp: '2025-11-12T08:35:00Z',
+    read: true
+  },
+  {
+    id: 'msg-11',
+    bookingId: 'booking-007',
+    senderId: 'client-7',
+    senderName: 'Claudia Rojas',
+    senderRole: 'client',
+    message: 'Genial! Él es muy curioso pero no molesta. Nos vemos a las 9:00 entonces.',
+    timestamp: '2025-11-12T08:40:00Z',
+    read: true
+  },
+
+  // Chat para booking-004 (Pendiente)
+  {
+    id: 'msg-12',
+    bookingId: 'booking-004',
+    senderId: 'client-10',
+    senderName: 'Roberto Díaz',
+    senderRole: 'client',
+    message: 'Buenas! Tengo una reunión importante ese día, ¿podrías asegurarme que terminarás exactamente a las 14:00?',
+    timestamp: '2025-11-18T11:00:00Z',
+    read: false
+  }
+];
 
 export const mockTerms: TermsAndConditions = {
   id: 'terms-1',
@@ -811,6 +941,9 @@ export const workerFAQs: FAQItem[] = [
     userType: 'worker',
   },
 ];
+
+
+
 
 // Estado global simulado
 export const appState: {

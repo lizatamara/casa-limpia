@@ -35,6 +35,8 @@ const Auth = () => {
         navigate('/worker/dashboard');
       } else if (user.role === 'client') {
         navigate('/client/dashboard');
+      } else if (user.role === 'admin') { // ✅ FALTABA ESTA LÍNEA
+      navigate('/admin/dashboard');
       }
     }
   }, [user, navigate]);
