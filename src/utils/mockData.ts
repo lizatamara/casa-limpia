@@ -63,6 +63,62 @@ export const mockUsers: Record<string, User> = {
     address: 'Av. Ñuñoa 654',
     comuna: 'Ñuñoa'
   },
+  // Nuevos clientes para las reservas
+  'client-6': {
+    id: 'client-6',
+    email: 'jorge.martinez@email.com',
+    role: 'client',
+    name: 'Jorge Martínez',
+    phone: '+56 9 3210 9876',
+    address: 'Pedro de Valdivia 123',
+    comuna: 'Providencia'
+  },
+  'client-7': {
+    id: 'client-7',
+    email: 'claudia.rojas@email.com',
+    role: 'client',
+    name: 'Claudia Rojas',
+    phone: '+56 9 2109 8765',
+    address: 'Av. Apoquindo 4500',
+    comuna: 'Las Condes'
+  },
+  'client-8': {
+    id: 'client-8',
+    email: 'fernando.castro@email.com',
+    role: 'client',
+    name: 'Fernando Castro',
+    phone: '+56 9 1098 7654',
+    address: 'Los Leones 234',
+    comuna: 'Providencia'
+  },
+  'client-9': {
+    id: 'client-9',
+    email: 'patricia.navarro@email.com',
+    role: 'client',
+    name: 'Patricia Navarro',
+    phone: '+56 9 0987 6543',
+    address: 'Av. Kennedy 9001',
+    comuna: 'Las Condes'
+  },
+  'client-10': {
+    id: 'client-10',
+    email: 'roberto.diaz@email.com',
+    role: 'client',
+    name: 'Roberto Díaz',
+    phone: '+56 9 5432 1098',
+    address: 'Av. Vitacura 4456',
+    comuna: 'Vitacura'
+  },
+  'client-11': {
+    id: 'client-11',
+    email: 'elena.morales@email.com',
+    role: 'client',
+    name: 'Elena Morales',
+    phone: '+56 9 4321 0987',
+    address: 'Los Conquistadores 2100',
+    comuna: 'Pudahuel'
+  },
+
   'worker-1': {
     id: 'worker-1',
     email: 'trabajador@example.com',
@@ -133,6 +189,20 @@ export const mockUsers: Record<string, User> = {
     taxComuna: 'Macul',
     taxEmail: 'facturacion@pureclean.cl'
   },
+  'worker-6': {
+    id: 'worker-6',
+    email: 'trabajador6@example.com',
+    role: 'worker',
+    name: 'Miguel Ángel Ríos',
+    phone: '+56 9 9090 1010',
+    address: 'Av. Independencia 123',
+    comuna: 'Independencia',
+    businessName: 'Servicios Integrales Ríos',
+    commercialName: 'CleanTotal',
+    taxAddress: 'Av. Independencia 123',
+    taxComuna: 'Independencia',
+    taxEmail: 'contacto@cleantotal.cl'
+  },
   'admin-1': {
     id: 'admin-1',
     email: 'admin@casalimpia.cl',
@@ -165,7 +235,8 @@ export const mockWorkers: WorkerProfile[] = [
     reviewCount: 45,
     isAvailable: true,
     isPaused: false,
-    isApproved: true
+    isApproved: true,
+    approvalDate: '2024-01-15'
   },
   {
     id: 'worker-2',
@@ -186,7 +257,8 @@ export const mockWorkers: WorkerProfile[] = [
     reviewCount: 67,
     isAvailable: true,
     isPaused: false,
-    isApproved: true
+    isApproved: true,
+    approvalDate: '2024-01-20'
   },
   {
     id: 'worker-3',
@@ -207,7 +279,8 @@ export const mockWorkers: WorkerProfile[] = [
     reviewCount: 89,
     isAvailable: true,
     isPaused: false,
-    isApproved: true
+    isApproved: true,
+    approvalDate: '2024-01-10'
   },
   {
     id: 'worker-4',
@@ -228,7 +301,8 @@ export const mockWorkers: WorkerProfile[] = [
     reviewCount: 23,
     isAvailable: true,
     isPaused: false,
-    isApproved: true
+    isApproved: true,
+    approvalDate: '2024-02-01'
   },
   {
     id: 'worker-5',
@@ -249,7 +323,8 @@ export const mockWorkers: WorkerProfile[] = [
     reviewCount: 34,
     isAvailable: false,
     isPaused: true,
-    isApproved: true
+    isApproved: true,
+    approvalDate: '2024-01-25'
   },
   {
     id: 'worker-6',
@@ -320,8 +395,178 @@ export const mockRates: Record<string, ServiceRate[]> = {
   ]
 };
 
-// Reservas mock expandidas
+// Reservas mock expandidas con nuevos estados
 export const mockBookings: Booking[] = [
+  // Reservas ACEPTADAS/CONFIRMADAS (que el trabajador puede cancelar)
+  {
+    id: 'booking-001',
+    workerId: 'worker-1', // Diego Herrera
+    clientId: 'client-1',
+    serviceType: 'deep_cleaning',
+    date: '2025-12-22',
+    timeSlot: {
+      startTime: '10:00',
+      endTime: '13:00'
+    },
+    price: 45000,
+    status: 'accepted',
+    clientNotes: 'Por favor traer productos para pisos de madera',
+    address: 'Av. Manuel Montt 1234',
+    comuna: 'Providencia',
+    createdAt: '2025-11-10T08:00:00Z',
+    updatedAt: '2025-11-10T09:30:00Z'
+  },
+  {
+    id: 'booking-002',
+    workerId: 'worker-1', // Diego Herrera
+    clientId: 'client-2',
+    serviceType: 'normal',
+    date: '2025-12-24',
+    timeSlot: {
+      startTime: '14:00',
+      endTime: '17:00'
+    },
+    price: 35000,
+    status: 'accepted',
+    address: 'Los Plátanos 567',
+    comuna: 'Las Condes',
+    createdAt: '2025-11-12T10:00:00Z',
+    updatedAt: '2025-11-12T11:15:00Z'
+  },
+  {
+    id: 'booking-003',
+    workerId: 'worker-1', // Diego Herrera
+    clientId: 'client-3',
+    serviceType: 'deep_cleaning',
+    date: '2025-12-26',
+    timeSlot: {
+      startTime: '09:00',
+      endTime: '15:00'
+    },
+    price: 75000,
+    status: 'accepted',
+    clientNotes: 'Departamento recién entregado, necesita limpieza profunda',
+    address: 'El Golf 2500',
+    comuna: 'Las Condes',
+    createdAt: '2025-11-14T14:00:00Z',
+    updatedAt: '2025-11-14T15:20:00Z'
+  },
+
+  // Reservas PENDIENTES (que el trabajador puede aceptar/rechazar)
+  {
+    id: 'booking-004',
+    workerId: 'worker-1',
+    clientId: 'client-10',
+    serviceType: 'normal',
+    date: '2025-12-28',
+    timeSlot: {
+      startTime: '11:00',
+      endTime: '14:00'
+    },
+    price: 35000,
+    status: 'pending',
+    address: 'Av. Vitacura 4456',
+    comuna: 'Vitacura',
+    createdAt: '2025-11-15T16:00:00Z'
+  },
+
+  // Reservas EN PROGRESO
+  {
+    id: 'booking-005',
+    workerId: 'worker-1',
+    clientId: 'client-11',
+    serviceType: 'deep_cleaning',
+    date: '2025-12-01',
+    timeSlot: {
+      startTime: '08:00',
+      endTime: '12:00'
+    },
+    price: 45000,
+    status: 'in_progress',
+    address: 'Los Conquistadores 2100',
+    comuna: 'Pudahuel',
+    createdAt: '2025-11-08T09:00:00Z',
+    updatedAt: '2025-11-30T18:00:00Z'
+  },
+
+  // Reservas COMPLETADAS (historial)
+  {
+    id: 'booking-006',
+    workerId: 'worker-1',
+    clientId: 'client-6',
+    serviceType: 'normal',
+    date: '2025-11-05',
+    timeSlot: {
+      startTime: '15:00',
+      endTime: '18:00'
+    },
+    price: 35000,
+    status: 'completed',
+    address: 'Pedro de Valdivia 123',
+    comuna: 'Providencia',
+    createdAt: '2025-10-25T12:00:00Z',
+    updatedAt: '2025-11-05T18:30:00Z'
+  },
+  {
+    id: 'booking-007',
+    workerId: 'worker-1',
+    clientId: 'client-7',
+    serviceType: 'deep_cleaning',
+    date: '2025-11-12',
+    timeSlot: {
+      startTime: '09:00',
+      endTime: '13:00'
+    },
+    price: 45000,
+    status: 'completed',
+    clientNotes: 'Mascota en casa, pero está acostumbrado a limpiezas',
+    address: 'Av. Apoquindo 4500',
+    comuna: 'Las Condes',
+    createdAt: '2025-11-01T10:00:00Z',
+    updatedAt: '2025-11-12T13:15:00Z'
+  },
+
+  // Reservas CANCELADAS (ejemplos de cancelaciones)
+  {
+    id: 'booking-008',
+    workerId: 'worker-1',
+    clientId: 'client-8',
+    serviceType: 'normal',
+    date: '2025-11-18',
+    timeSlot: {
+      startTime: '16:00',
+      endTime: '19:00'
+    },
+    price: 35000,
+    status: 'cancelled',
+    address: 'Los Leones 234',
+    comuna: 'Providencia',
+    createdAt: '2025-11-03T11:00:00Z',
+    updatedAt: '2025-11-10T14:00:00Z',
+    cancelledBy: 'worker',
+    cancellationReason: 'Problemas de salud'
+  },
+  {
+    id: 'booking-009',
+    workerId: 'worker-1',
+    clientId: 'client-9',
+    serviceType: 'deep_cleaning',
+    date: '2025-11-25',
+    timeSlot: {
+      startTime: '08:00',
+      endTime: '14:00'
+    },
+    price: 75000,
+    status: 'cancelled',
+    address: 'Av. Kennedy 9001',
+    comuna: 'Las Condes',
+    createdAt: '2025-11-05T15:00:00Z',
+    updatedAt: '2025-11-20T10:00:00Z',
+    cancelledBy: 'client',
+    cancellationReason: 'Cambio de fecha de mudanza'
+  },
+
+  // Reservas existentes (mantener compatibilidad)
   {
     id: 'booking-1',
     workerId: 'worker-1',
@@ -335,98 +580,6 @@ export const mockBookings: Booking[] = [
     address: 'Av. Providencia 1234',
     comuna: 'Providencia',
     createdAt: '2024-01-05'
-  },
-  {
-    id: 'booking-2',
-    workerId: 'worker-2',
-    clientId: 'client-2',
-    serviceType: 'deep_cleaning',
-    date: '2024-01-15',
-    timeSlot: { startTime: '10:00', endTime: '15:00', isAvailable: false },
-    price: 23000,
-    status: 'completed',
-    address: 'Av. Las Condes 456',
-    comuna: 'Las Condes',
-    createdAt: '2024-01-12'
-  },
-  {
-    id: 'booking-3',
-    workerId: 'worker-3',
-    clientId: 'client-3',
-    serviceType: 'urgent',
-    date: '2024-02-05',
-    timeSlot: { startTime: '14:00', endTime: '17:00', isAvailable: false },
-    price: 22000,
-    status: 'completed',
-    clientNotes: 'Necesito limpieza urgente por visita inesperada',
-    address: 'Av. Vitacura 789',
-    comuna: 'Vitacura',
-    createdAt: '2024-02-04'
-  },
-  {
-    id: 'booking-4',
-    workerId: 'worker-1',
-    clientId: 'client-4',
-    serviceType: 'bathroom_kitchen',
-    date: '2024-02-20',
-    timeSlot: { startTime: '11:00', endTime: '13:00', isAvailable: false },
-    price: 12000,
-    status: 'completed',
-    address: 'Av. La Florida 321',
-    comuna: 'La Florida',
-    createdAt: '2024-02-18'
-  },
-  {
-    id: 'booking-5',
-    workerId: 'worker-4',
-    clientId: 'client-5',
-    serviceType: 'normal',
-    date: '2024-03-08',
-    timeSlot: { startTime: '08:00', endTime: '11:00', isAvailable: false },
-    price: 12000,
-    status: 'completed',
-    address: 'Av. Ñuñoa 654',
-    comuna: 'Ñuñoa',
-    createdAt: '2024-03-05'
-  },
-  {
-    id: 'booking-6',
-    workerId: 'worker-2',
-    clientId: 'client-1',
-    serviceType: 'windows_carpets',
-    date: '2024-03-15',
-    timeSlot: { startTime: '13:00', endTime: '16:00', isAvailable: false },
-    price: 17000,
-    status: 'completed',
-    address: 'Av. Providencia 1234',
-    comuna: 'Providencia',
-    createdAt: '2024-03-12'
-  },
-  {
-    id: 'booking-7',
-    workerId: 'worker-3',
-    clientId: 'client-2',
-    serviceType: 'deep_cleaning',
-    date: '2024-04-02',
-    timeSlot: { startTime: '09:00', endTime: '14:00', isAvailable: false },
-    price: 28000,
-    status: 'completed',
-    address: 'Av. Las Condes 456',
-    comuna: 'Las Condes',
-    createdAt: '2024-03-30'
-  },
-  {
-    id: 'booking-8',
-    workerId: 'worker-5',
-    clientId: 'client-3',
-    serviceType: 'normal',
-    date: '2024-04-10',
-    timeSlot: { startTime: '10:00', endTime: '13:00', isAvailable: false },
-    price: 14500,
-    status: 'completed',
-    address: 'Av. Vitacura 789',
-    comuna: 'Vitacura',
-    createdAt: '2024-04-08'
   },
   {
     id: 'booking-9',
@@ -453,63 +606,54 @@ export const mockBookings: Booking[] = [
     address: 'Av. Ñuñoa 654',
     comuna: 'Ñuñoa',
     createdAt: '2024-05-22'
-  },
-  {
-    id: 'booking-11',
-    workerId: 'worker-4',
-    clientId: 'client-1',
-    serviceType: 'bathroom_kitchen',
-    date: '2024-05-28',
-    timeSlot: { startTime: '16:00', endTime: '18:00', isAvailable: false },
-    price: 9000,
-    status: 'pending',
-    address: 'Av. Providencia 1234',
-    comuna: 'Providencia',
-    createdAt: '2024-05-25'
-  },
-  {
-    id: 'booking-12',
-    workerId: 'worker-3',
-    clientId: 'client-2',
-    serviceType: 'deep_cleaning',
-    date: '2024-05-30',
-    timeSlot: { startTime: '08:00', endTime: '13:00', isAvailable: false },
-    price: 28000,
-    status: 'accepted',
-    address: 'Av. Las Condes 456',
-    comuna: 'Las Condes',
-    createdAt: '2024-05-27'
-  },
-  {
-    id: 'booking-13',
-    workerId: 'worker-5',
-    clientId: 'client-3',
-    serviceType: 'windows_carpets',
-    date: '2024-04-15',
-    timeSlot: { startTime: '14:00', endTime: '17:00', isAvailable: false },
-    price: 17500,
-    status: 'cancelled',
-    address: 'Av. Vitacura 789',
-    comuna: 'Vitacura',
-    createdAt: '2024-04-10'
-  },
-  {
-    id: 'booking-14',
-    workerId: 'worker-6',
-    clientId: 'client-4',
-    serviceType: 'normal',
-    date: '2024-05-05',
-    timeSlot: { startTime: '09:00', endTime: '12:00', isAvailable: false },
-    price: 13000,
-    status: 'rejected',
-    address: 'Av. La Florida 321',
-    comuna: 'La Florida',
-    createdAt: '2024-05-01'
   }
 ];
 
 // Pagos mock expandidos
 export const mockPayments: Payment[] = [
+  // Pagos para las nuevas reservas
+  {
+    id: 'payment-001',
+    bookingId: 'booking-001',
+    amount: 45000,
+    date: '2025-11-10',
+    status: 'completed',
+    method: 'credit_card'
+  },
+  {
+    id: 'payment-002',
+    bookingId: 'booking-002',
+    amount: 35000,
+    date: '2025-11-12',
+    status: 'completed',
+    method: 'debit_card'
+  },
+  {
+    id: 'payment-003',
+    bookingId: 'booking-003',
+    amount: 75000,
+    date: '2025-11-14',
+    status: 'completed',
+    method: 'transfer'
+  },
+  {
+    id: 'payment-004',
+    bookingId: 'booking-004',
+    amount: 35000,
+    date: '2025-11-15',
+    status: 'pending',
+    method: 'credit_card'
+  },
+  {
+    id: 'payment-005',
+    bookingId: 'booking-005',
+    amount: 45000,
+    date: '2025-11-08',
+    status: 'completed',
+    method: 'debit_card'
+  },
+
+  // Pagos existentes
   {
     id: 'payment-1',
     bookingId: 'booking-1',
@@ -519,89 +663,40 @@ export const mockPayments: Payment[] = [
     method: 'credit_card'
   },
   {
-    id: 'payment-2',
-    bookingId: 'booking-2',
-    amount: 23000,
-    date: '2024-01-15',
-    status: 'completed',
-    method: 'debit_card'
-  },
-  {
-    id: 'payment-3',
-    bookingId: 'booking-3',
-    amount: 22000,
-    date: '2024-02-05',
-    status: 'completed',
-    method: 'credit_card'
-  },
-  {
-    id: 'payment-4',
-    bookingId: 'booking-4',
-    amount: 12000,
-    date: '2024-02-20',
-    status: 'completed',
-    method: 'transfer'
-  },
-  {
-    id: 'payment-5',
-    bookingId: 'booking-5',
-    amount: 12000,
-    date: '2024-03-08',
-    status: 'completed',
-    method: 'debit_card'
-  },
-  {
-    id: 'payment-6',
-    bookingId: 'booking-6',
-    amount: 17000,
-    date: '2024-03-15',
-    status: 'completed',
-    method: 'credit_card'
-  },
-  {
-    id: 'payment-7',
-    bookingId: 'booking-7',
-    amount: 28000,
-    date: '2024-04-02',
-    status: 'completed',
-    method: 'transfer'
-  },
-  {
-    id: 'payment-8',
-    bookingId: 'booking-8',
-    amount: 14500,
-    date: '2024-04-10',
-    status: 'completed',
-    method: 'debit_card'
-  },
-  {
     id: 'payment-9',
     bookingId: 'booking-9',
     amount: 20000,
     date: '2024-05-20',
     status: 'pending',
     method: 'credit_card'
-  },
-  {
-    id: 'payment-10',
-    bookingId: 'booking-12',
-    amount: 28000,
-    date: '2024-05-30',
-    status: 'pending',
-    method: 'transfer'
-  },
-  {
-    id: 'payment-11',
-    bookingId: 'booking-13',
-    amount: 17500,
-    date: '2024-04-15',
-    status: 'refunded',
-    method: 'credit_card'
   }
 ];
 
 // Reseñas mock expandidas
 export const mockReviews: Review[] = [
+  // Reseñas para las nuevas reservas
+  {
+    id: 'review-001',
+    workerId: 'worker-1',
+    clientId: 'client-6',
+    clientName: 'Jorge Martínez',
+    bookingId: 'booking-006',
+    rating: 5,
+    comment: 'Excelente servicio, muy profesional y detallista. Recomendado 100%!',
+    date: '2025-11-05'
+  },
+  {
+    id: 'review-002',
+    workerId: 'worker-1',
+    clientId: 'client-7',
+    clientName: 'Claudia Rojas',
+    bookingId: 'booking-007',
+    rating: 4,
+    comment: 'Muy buen trabajo, aunque llegó un poco tarde. La limpieza fue impecable.',
+    date: '2025-11-12'
+  },
+
+  // Reseñas existentes
   {
     id: 'review-1',
     workerId: 'worker-1',
@@ -611,96 +706,6 @@ export const mockReviews: Review[] = [
     rating: 5,
     comment: 'Excelente servicio, muy profesional y puntual. Dejó mi casa impecable!',
     date: '2024-01-10'
-  },
-  {
-    id: 'review-2',
-    workerId: 'worker-1',
-    clientId: 'client-4',
-    clientName: 'Pedro Martínez',
-    bookingId: 'booking-4',
-    rating: 4,
-    comment: 'Muy buen trabajo, quedó todo impecable. Solo llegó 10 minutos tarde.',
-    date: '2024-02-20'
-  },
-  {
-    id: 'review-3',
-    workerId: 'worker-2',
-    clientId: 'client-2',
-    clientName: 'Carlos López',
-    bookingId: 'booking-2',
-    rating: 5,
-    comment: 'Increíble trabajo de limpieza profunda. Superó mis expectativas completamente!',
-    date: '2024-01-15'
-  },
-  {
-    id: 'review-4',
-    workerId: 'worker-2',
-    clientId: 'client-1',
-    clientName: 'María González',
-    bookingId: 'booking-6',
-    rating: 4,
-    comment: 'Muy buen servicio de vidrios y alfombras. Los dejó como nuevos!',
-    date: '2024-03-15'
-  },
-  {
-    id: 'review-5',
-    workerId: 'worker-3',
-    clientId: 'client-3',
-    clientName: 'Ana Rodríguez',
-    bookingId: 'booking-3',
-    rating: 5,
-    comment: 'Servicio urgente excelente! Llegó en menos de 2 horas y solucionó todo.',
-    date: '2024-02-05'
-  },
-  {
-    id: 'review-6',
-    workerId: 'worker-3',
-    clientId: 'client-2',
-    clientName: 'Carlos López',
-    bookingId: 'booking-7',
-    rating: 5,
-    comment: 'La mejor limpieza profunda que he tenido. Patricia es increíblemente detallista!',
-    date: '2024-04-02'
-  },
-  {
-    id: 'review-7',
-    workerId: 'worker-4',
-    clientId: 'client-5',
-    clientName: 'Laura Fernández',
-    bookingId: 'booking-5',
-    rating: 4,
-    comment: 'Buen servicio por el precio. Diego es muy amable y trabajador.',
-    date: '2024-03-08'
-  },
-  {
-    id: 'review-8',
-    workerId: 'worker-5',
-    clientId: 'client-3',
-    clientName: 'Ana Rodríguez',
-    bookingId: 'booking-8',
-    rating: 5,
-    comment: 'Me encanta que usa productos ecológicos. Perfecto para mi familia con alergias.',
-    date: '2024-04-10'
-  },
-  {
-    id: 'review-9',
-    workerId: 'worker-1',
-    clientId: 'client-5',
-    clientName: 'Laura Fernández',
-    bookingId: 'booking-14',
-    rating: 3,
-    comment: 'Servicio regular. Esperaba más atención a los detalles por el precio.',
-    date: '2024-03-22'
-  },
-  {
-    id: 'review-10',
-    workerId: 'worker-2',
-    clientId: 'client-4',
-    clientName: 'Pedro Martínez',
-    bookingId: 'booking-15',
-    rating: 5,
-    comment: 'Carlos es un profesional excepcional. Lo recomiendo 100%!',
-    date: '2024-04-18'
   }
 ];
 

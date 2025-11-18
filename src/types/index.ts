@@ -7,6 +7,8 @@ export type ServiceType =
   | 'windows_carpets'
   | 'urgent';
 
+export type BookingStatus = 'pending' | 'accepted' | 'rejected' | 'completed' | 'cancelled' | 'in_progress';
+
 export interface User {
   id: string;
   email: string;
@@ -33,6 +35,7 @@ export interface WorkerProfile extends User {
   isAvailable: boolean;
   isPaused: boolean;
   isApproved: boolean;
+  approvalDate?: string;
 }
 
 export interface ServiceRate {
@@ -50,7 +53,7 @@ export interface Availability {
 export interface TimeSlot {
   startTime: string; // HH:mm
   endTime: string; // HH:mm
-  isAvailable: boolean;
+  isAvailable?: boolean;
 }
 
 export interface Booking {
@@ -61,11 +64,14 @@ export interface Booking {
   date: string;
   timeSlot: TimeSlot;
   price: number;
-  status: 'pending' | 'accepted' | 'rejected' | 'completed' | 'cancelled';
+  status: BookingStatus;
   clientNotes?: string;
   address: string;
   comuna: string;
   createdAt: string;
+  updatedAt?: string;
+  cancelledBy?: 'client' | 'worker';
+  cancellationReason?: string;
 }
 
 export interface Review {
