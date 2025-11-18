@@ -4,8 +4,9 @@ import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { ArrowLeft, Download, TrendingUp, DollarSign, Calendar } from 'lucide-react';
+import { ArrowLeft, Download, TrendingUp, DollarSign, Calendar, BarChart3 } from 'lucide-react';
 import { appState, serviceTypes } from '@/utils/mockData';
+import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 export default function AdminReports() {
   const { user } = useAuth();
@@ -16,7 +17,9 @@ export default function AdminReports() {
     netRevenue: 0,
     completedBookings: 0,
     averagePrice: 0,
-    byServiceType: {} as Record<string, { count: number; revenue: number }>
+    byServiceType: {} as Record<string, { count: number; revenue: number }>,
+    chartData: [] as { name: string; value: number; count: number }[],
+    revenueData: [] as { name: string; ingresos: number; comision: number }[]
   });
 
   useEffect(() => {
@@ -69,14 +72,34 @@ export default function AdminReports() {
       byServiceType[b.serviceType].revenue += b.price;
     });
 
+    // Datos para gráficos
+    const chartData = Object.entries(byServiceType).map(([type, data]) => ({
+      name: serviceTypes[type as keyof typeof serviceTypes],
+      value: data.count,
+      count: data.count,
+      revenue: data.revenue
+    }));
+
+    const revenueData = Object.entries(byServiceType).map(([type, data]) => ({
+      name: serviceTypes[type as keyof typeof serviceTypes],
+      ingresos: data.revenue,
+      comision: Math.round(data.revenue * platformFee)
+    }));
+
     setReportData({
       totalRevenue,
       netRevenue,
       completedBookings: filteredBookings.length,
       averagePrice,
-      byServiceType
+      byServiceType,
+      chartData,
+      revenueData
     });
   };
+
+  // Colores para los gráficos
+  const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884D8', '#82CA9D'];
+  const BAR_COLORS = ['#3B82F6', '#10B981']; // Azul para ingresos, Verde para comisión
 
   const downloadReport = () => {
     const periodLabels: Record<string, string> = {
@@ -204,6 +227,93 @@ export default function AdminReports() {
           </Card>
         </div>
 
+        {/* SECCIÓN DE GRÁFICOS */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+          {/* Gráfico de torta - Distribución de servicios */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <PieChart className="h-5 w-5" />
+                Distribución de Servicios
+              </CardTitle>
+              <CardDescription>Cantidad de servicios por tipo</CardDescription>
+            </CardHeader>
+            <CardContent>
+              {reportData.chartData.length === 0 ? (
+                <div className="h-64 flex items-center justify-center text-muted-foreground">
+                  No hay datos para mostrar
+                </div>
+              ) : (
+                <ResponsiveContainer width="100%" height={350}> {/* Aumenta un poco el height */}
+  <PieChart margin={{ top: 20, right: 0, left: 0, bottom: 80 }}> {/* Aumenta bottom margin */}
+    <Pie
+      data={reportData.chartData}
+      cx="50%"
+      cy="50%"
+      labelLine={false}
+      outerRadius={80}
+      fill="#8884d8"
+      dataKey="value"
+    >
+      {reportData.chartData.map((entry, index) => (
+        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+      ))}
+    </Pie>
+    <Tooltip 
+      formatter={(value, name) => [`${value} servicios`, 'Cantidad']}
+    />
+    <Legend 
+      layout="horizontal"
+      verticalAlign="bottom"
+      align="center"
+      wrapperStyle={{
+        paddingTop: "20px",
+        fontSize: "11px"
+      }}
+    />
+  </PieChart>
+</ResponsiveContainer>
+              )}
+            </CardContent>
+          </Card>
+
+          {/* Gráfico de barras - Ingresos vs Comisión */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <BarChart3 className="h-5 w-5" />
+                Ingresos vs Comisión
+              </CardTitle>
+              <CardDescription>Comparación por tipo de servicio</CardDescription>
+            </CardHeader>
+            <CardContent>
+              {reportData.revenueData.length === 0 ? (
+                <div className="h-64 flex items-center justify-center text-muted-foreground">
+                  No hay datos para mostrar
+                </div>
+              ) : (
+                <ResponsiveContainer width="100%" height={300}>
+                  <BarChart
+                    data={reportData.revenueData}
+                    margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+                  >
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="name" />
+                    <YAxis />
+                    <Tooltip 
+                      formatter={(value) => [`$${value.toLocaleString('es-CL')}`, '']}
+                    />
+                    <Legend />
+                    <Bar dataKey="ingresos" name="Ingresos Totales" fill={BAR_COLORS[0]} />
+                    <Bar dataKey="comision" name="Comisión (15%)" fill={BAR_COLORS[1]} />
+                  </BarChart>
+                </ResponsiveContainer>
+              )}
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Tabla de desglose (existente) */}
         <Card>
           <CardHeader>
             <CardTitle>Desglose por Tipo de Servicio</CardTitle>

@@ -538,7 +538,9 @@ export const mockBookings: Booking[] = [
     updatedAt: '2025-11-30T18:00:00Z'
   },
 
-  // Reservas COMPLETADAS (historial)
+  // ========== RESERVAS COMPLETADAS CON DISTRIBUCIÓN VARIADA ==========
+  
+  // 🥇 LIMPIEZA NORMAL (6 reservas - 37.5%)
   {
     id: 'booking-006',
     workerId: 'worker-1',
@@ -554,30 +556,278 @@ export const mockBookings: Booking[] = [
     address: 'Pedro de Valdivia 123',
     comuna: 'Providencia',
     createdAt: '2025-10-25T12:00:00Z',
-    updatedAt: '2025-11-05T18:30:00Z'
+    updatedAt: '2025-11-05T18:30:00Z',
+    hasReview: true
   },
   {
     id: 'booking-007',
-    workerId: 'worker-1',
+    workerId: 'worker-2',
     clientId: 'client-7',
-    serviceType: 'deep_cleaning',
+    serviceType: 'normal',
+    date: '2025-11-10',
+    timeSlot: {
+      startTime: '14:00',
+      endTime: '17:00'
+    },
+    price: 32000,
+    status: 'completed',
+    address: 'Los Leones 200',
+    comuna: 'Providencia',
+    createdAt: '2025-10-29T11:00:00Z',
+    updatedAt: '2025-11-10T17:15:00Z'
+  },
+  {
+    id: 'booking-008',
+    workerId: 'worker-3',
+    clientId: 'client-8',
+    serviceType: 'normal',
     date: '2025-11-12',
     timeSlot: {
       startTime: '09:00',
+      endTime: '12:00'
+    },
+    price: 38000,
+    status: 'completed',
+    address: 'Av. Providencia 1001',
+    comuna: 'Providencia',
+    createdAt: '2025-10-28T09:00:00Z',
+    updatedAt: '2025-11-12T12:30:00Z'
+  },
+  {
+    id: 'booking-009',
+    workerId: 'worker-1',
+    clientId: 'client-9',
+    serviceType: 'normal',
+    date: '2025-11-15',
+    timeSlot: {
+      startTime: '10:00',
       endTime: '13:00'
     },
-    price: 45000,
+    price: 34000,
+    status: 'completed',
+    address: 'Av. Las Condes 3000',
+    comuna: 'Las Condes',
+    createdAt: '2025-11-01T14:00:00Z',
+    updatedAt: '2025-11-15T13:15:00Z'
+  },
+  {
+    id: 'booking-010',
+    workerId: 'worker-2',
+    clientId: 'client-10',
+    serviceType: 'normal',
+    date: '2025-11-18',
+    timeSlot: {
+      startTime: '16:00',
+      endTime: '19:00'
+    },
+    price: 36000,
+    status: 'completed',
+    address: 'Av. Vitacura 2500',
+    comuna: 'Vitacura',
+    createdAt: '2025-11-05T10:00:00Z',
+    updatedAt: '2025-11-18T19:30:00Z'
+  },
+  {
+    id: 'booking-011',
+    workerId: 'worker-3',
+    clientId: 'client-11',
+    serviceType: 'normal',
+    date: '2025-11-20',
+    timeSlot: {
+      startTime: '08:00',
+      endTime: '11:00'
+    },
+    price: 33000,
+    status: 'completed',
+    address: 'Los Conquistadores 1500',
+    comuna: 'Pudahuel',
+    createdAt: '2025-11-08T16:00:00Z',
+    updatedAt: '2025-11-20T11:15:00Z'
+  },
+
+  // 🥈 BAÑO Y COCINA (4 reservas - 25%)
+  {
+    id: 'booking-012',
+    workerId: 'worker-1',
+    clientId: 'client-1',
+    serviceType: 'bathroom_kitchen',
+    date: '2025-11-08',
+    timeSlot: {
+      startTime: '09:00',
+      endTime: '11:00'
+    },
+    price: 25000,
+    status: 'completed',
+    address: 'Av. Las Condes 8000',
+    comuna: 'Las Condes',
+    createdAt: '2025-10-30T08:00:00Z',
+    updatedAt: '2025-11-08T11:30:00Z'
+  },
+  {
+    id: 'booking-013',
+    workerId: 'worker-2',
+    clientId: 'client-2',
+    serviceType: 'bathroom_kitchen',
+    date: '2025-11-14',
+    timeSlot: {
+      startTime: '14:00',
+      endTime: '16:00'
+    },
+    price: 22000,
+    status: 'completed',
+    address: 'Los Plátanos 300',
+    comuna: 'Las Condes',
+    createdAt: '2025-11-03T12:00:00Z',
+    updatedAt: '2025-11-14T16:15:00Z'
+  },
+  {
+    id: 'booking-014',
+    workerId: 'worker-3',
+    clientId: 'client-3',
+    serviceType: 'bathroom_kitchen',
+    date: '2025-11-19',
+    timeSlot: {
+      startTime: '11:00',
+      endTime: '13:00'
+    },
+    price: 28000,
+    status: 'completed',
+    address: 'El Golf 1500',
+    comuna: 'Las Condes',
+    createdAt: '2025-11-09T15:00:00Z',
+    updatedAt: '2025-11-19T13:30:00Z'
+  },
+  {
+    id: 'booking-015',
+    workerId: 'worker-1',
+    clientId: 'client-4',
+    serviceType: 'bathroom_kitchen',
+    date: '2025-11-22',
+    timeSlot: {
+      startTime: '15:00',
+      endTime: '17:00'
+    },
+    price: 24000,
+    status: 'completed',
+    address: 'Av. La Florida 500',
+    comuna: 'La Florida',
+    createdAt: '2025-11-12T09:00:00Z',
+    updatedAt: '2025-11-22T17:20:00Z'
+  },
+
+  // 🥉 LIMPIEZA PROFUNDA (3 reservas - 18.75%)
+  {
+    id: 'booking-016',
+    workerId: 'worker-2',
+    clientId: 'client-5',
+    serviceType: 'deep_cleaning',
+    date: '2025-11-07',
+    timeSlot: {
+      startTime: '08:00',
+      endTime: '13:00'
+    },
+    price: 55000,
+    status: 'completed',
+    address: 'Av. Ñuñoa 800',
+    comuna: 'Ñuñoa',
+    createdAt: '2025-10-27T10:00:00Z',
+    updatedAt: '2025-11-07T13:15:00Z'
+  },
+  {
+    id: 'booking-017',
+    workerId: 'worker-3',
+    clientId: 'client-6',
+    serviceType: 'deep_cleaning',
+    date: '2025-11-16',
+    timeSlot: {
+      startTime: '09:00',
+      endTime: '14:00'
+    },
+    price: 60000,
+    status: 'completed',
+    address: 'Av. Vitacura 4500',
+    comuna: 'Vitacura',
+    createdAt: '2025-11-06T14:00:00Z',
+    updatedAt: '2025-11-16T14:30:00Z'
+  },
+  {
+    id: 'booking-018',
+    workerId: 'worker-1',
+    clientId: 'client-7',
+    serviceType: 'deep_cleaning',
+    date: '2025-11-25',
+    timeSlot: {
+      startTime: '10:00',
+      endTime: '15:00'
+    },
+    price: 58000,
     status: 'completed',
     clientNotes: 'Mascota en casa, pero está acostumbrado a limpiezas',
     address: 'Av. Apoquindo 4500',
     comuna: 'Las Condes',
-    createdAt: '2025-11-01T10:00:00Z',
-    updatedAt: '2025-11-12T13:15:00Z'
+    createdAt: '2025-11-15T11:00:00Z',
+    updatedAt: '2025-11-25T15:15:00Z',
+    hasReview: false
+  },
+
+  // 4️⃣ VIDRIOS Y ALFOMBRAS (2 reservas - 12.5%)
+  {
+    id: 'booking-019',
+    workerId: 'worker-2',
+    clientId: 'client-8',
+    serviceType: 'windows_carpets',
+    date: '2025-11-11',
+    timeSlot: {
+      startTime: '11:00',
+      endTime: '14:00'
+    },
+    price: 40000,
+    status: 'completed',
+    address: 'Av. Apoquindo 3200',
+    comuna: 'Las Condes',
+    createdAt: '2025-11-01T16:00:00Z',
+    updatedAt: '2025-11-11T14:30:00Z'
+  },
+  {
+    id: 'booking-020',
+    workerId: 'worker-3',
+    clientId: 'client-9',
+    serviceType: 'windows_carpets',
+    date: '2025-11-21',
+    timeSlot: {
+      startTime: '13:00',
+      endTime: '16:00'
+    },
+    price: 42000,
+    status: 'completed',
+    address: 'Av. Kennedy 7500',
+    comuna: 'Las Condes',
+    createdAt: '2025-11-11T10:00:00Z',
+    updatedAt: '2025-11-21T16:15:00Z'
+  },
+
+  // 5️⃣ URGENTE (1 reserva - 6.25%)
+  {
+    id: 'booking-021',
+    workerId: 'worker-1',
+    clientId: 'client-10',
+    serviceType: 'urgent',
+    date: '2025-11-13',
+    timeSlot: {
+      startTime: '16:00',
+      endTime: '19:00'
+    },
+    price: 48000,
+    status: 'completed',
+    address: 'Los Conquistadores 1800',
+    comuna: 'Pudahuel',
+    createdAt: '2025-11-12T08:00:00Z',
+    updatedAt: '2025-11-13T19:15:00Z'
   },
 
   // Reservas CANCELADAS (ejemplos de cancelaciones)
   {
-    id: 'booking-008',
+    id: 'booking-022',
     workerId: 'worker-1',
     clientId: 'client-8',
     serviceType: 'normal',
@@ -596,7 +846,7 @@ export const mockBookings: Booking[] = [
     cancellationReason: 'Problemas de salud'
   },
   {
-    id: 'booking-009',
+    id: 'booking-023',
     workerId: 'worker-1',
     clientId: 'client-9',
     serviceType: 'deep_cleaning',
@@ -941,9 +1191,6 @@ export const workerFAQs: FAQItem[] = [
     userType: 'worker',
   },
 ];
-
-
-
 
 // Estado global simulado
 export const appState: {
