@@ -6,11 +6,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { ArrowLeft } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
+import { ArrowLeft, RepeatIcon } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { mockWorkers, mockRates, serviceTypes, comunas } from "@/utils/mockData";
 import { ServiceType } from "@/types";
-import { DatePicker } from "@/components/ui/date-picker";
 
 const BookingForm = () => {
   const { workerId } = useParams();
@@ -29,6 +29,7 @@ const BookingForm = () => {
   const [address, setAddress] = useState(user?.address || '');
   const [comuna, setComuna] = useState(user?.comuna || '');
   const [notes, setNotes] = useState('');
+  const [isRecurring, setIsRecurring] = useState(false);
 
   const selectedRate = rates.find(r => r.serviceType === serviceType);
 
@@ -49,11 +50,12 @@ const BookingForm = () => {
         workerName: worker?.name,
         serviceType,
         date,
-        timeSlot: { startTime, endTime, isAvailable: true },
+        timeSlot: { startTime, endTime },
         price: selectedRate.price,
         address,
         comuna,
-        notes
+        notes,
+        isRecurring // ✅ Agregado para reserva recurrente
       }
     });
   };
@@ -123,7 +125,7 @@ const BookingForm = () => {
                     value={date === "all" ? "" : date}
                     onChange={(e) => setDate(e.target.value)}
                     required
-                     className="[color-scheme:light] touch-manipulation cursor-pointer"
+                    className="[color-scheme:light] touch-manipulation cursor-pointer"
                   />
                 </div>
 
@@ -175,6 +177,35 @@ const BookingForm = () => {
                   placeholder="Información importante sobre el servicio (ej: mascota en casa, código de acceso, etc.)"
                   rows={3}
                 />
+              </div>
+
+              {/* ✅ SECCIÓN DE RESERVA RECURRENTE AGREGADA */}
+              <div className="flex items-start space-x-3 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                <Checkbox
+                  id="recurring"
+                  checked={isRecurring}
+                  onCheckedChange={(checked) => setIsRecurring(checked as boolean)}
+                  className="mt-1"
+                />
+                <div className="flex-1">
+                  <div className="flex items-center gap-2 mb-1">
+                    <RepeatIcon className="h-4 w-4 text-blue-600" />
+                    <Label htmlFor="recurring" className="font-medium cursor-pointer text-blue-800">
+                      Limpieza Semanal Recurrente
+                    </Label>
+                  </div>
+                  <p className="text-sm text-blue-700">
+                    Esta reserva se repetirá automáticamente cada semana en el mismo día y horario. 
+                    Podrás gestionar tus reservas recurrentes desde tu panel.
+                  </p>
+                  {isRecurring && (
+                    <div className="mt-2 p-2 bg-blue-100 rounded">
+                      <p className="text-xs text-blue-800 font-medium">
+                        💡 Se creará una reserva cada semana a partir de la fecha seleccionada
+                      </p>
+                    </div>
+                  )}
+                </div>
               </div>
 
               <Button type="submit" className="w-full" disabled={!selectedRate || !date}>

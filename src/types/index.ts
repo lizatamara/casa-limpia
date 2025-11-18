@@ -17,6 +17,9 @@ export interface User {
   phone: string;
   address: string;
   comuna: string;
+  isSuspended?: boolean;
+  acceptedTerms?: boolean;
+  acceptedTermsDate?: string;
   // Datos tributarios (solo trabajadores)
   businessName?: string;
   commercialName?: string;
@@ -53,7 +56,7 @@ export interface Availability {
 export interface TimeSlot {
   startTime: string; // HH:mm
   endTime: string; // HH:mm
-  isAvailable?: boolean;
+  isAvailable?: boolean; // Opcional para compatibilidad
 }
 
 export interface Booking {
@@ -72,6 +75,9 @@ export interface Booking {
   updatedAt?: string;
   cancelledBy?: 'client' | 'worker';
   cancellationReason?: string;
+  isRecurring?: boolean;
+  recurringBookingId?: string;
+  hasReview?: boolean;
 }
 
 export interface Review {
@@ -92,4 +98,48 @@ export interface Payment {
   date: string;
   status: 'pending' | 'completed' | 'refunded';
   method: 'credit_card' | 'debit_card' | 'transfer';
+}
+
+// Nuevos tipos para funcionalidades adicionales
+export interface RecurringBooking {
+  id: string;
+  workerId: string;
+  clientId: string;
+  serviceType: ServiceType;
+  dayOfWeek: number; // 0-6 (domingo a sábado)
+  timeSlot: TimeSlot;
+  price: number;
+  address: string;
+  comuna: string;
+  startDate: string;
+  endDate?: string;
+  isActive: boolean;
+  createdAt: string;
+}
+
+export interface Message {
+  id: string;
+  bookingId: string;
+  senderId: string;
+  senderName: string;
+  senderRole: UserRole;
+  message: string;
+  timestamp: string;
+  read: boolean;
+}
+
+export interface TermsAndConditions {
+  id: string;
+  content: string;
+  version: string;
+  updatedAt: string;
+  updatedBy: string;
+}
+
+export interface FAQItem {
+  id: string;
+  question: string;
+  answer: string;
+  category: string;
+  userType: 'client' | 'worker';
 }

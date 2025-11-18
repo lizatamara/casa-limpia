@@ -1,9 +1,9 @@
-import { WorkerProfile, ServiceRate, Availability, Booking, Review, Payment, User } from '@/types';
+import { User, WorkerProfile, ServiceRate, ServiceType, Review, Booking, Payment, RecurringBooking, Message, TermsAndConditions, FAQItem } from '@/types';
 
 // Comunas de Santiago
 export const comunas = [
   'Santiago', 'Providencia', 'Las Condes', 'Vitacura', 'Ñuñoa',
-  'La Reina', 'Macul', 'Peñalolén', 'La Florida', 'Puente Alto', 'San Miguel',
+  'La Reina', 'Macul', 'Peñalolén', 'La Florida', 'San Miguel',
   'Maipú', 'Pudahuel', 'Cerrillos', 'Estación Central', 'Independencia'
 ];
 
@@ -25,7 +25,10 @@ export const mockUsers: Record<string, User> = {
     name: 'María González',
     phone: '+56 9 1234 5678',
     address: 'Av. Providencia 1234',
-    comuna: 'Providencia'
+    comuna: 'Providencia',
+    isSuspended: false,
+    acceptedTerms: true,
+    acceptedTermsDate: '2024-01-01'
   },
   'client-2': {
     id: 'client-2',
@@ -34,7 +37,9 @@ export const mockUsers: Record<string, User> = {
     name: 'Carlos López',
     phone: '+56 9 2222 3333',
     address: 'Av. Las Condes 456',
-    comuna: 'Las Condes'
+    comuna: 'Las Condes',
+    isSuspended: false,
+    acceptedTerms: true
   },
   'client-3': {
     id: 'client-3',
@@ -43,7 +48,9 @@ export const mockUsers: Record<string, User> = {
     name: 'Ana Rodríguez',
     phone: '+56 9 4444 5555',
     address: 'Av. Vitacura 789',
-    comuna: 'Vitacura'
+    comuna: 'Vitacura',
+    isSuspended: false,
+    acceptedTerms: true
   },
   'client-4': {
     id: 'client-4',
@@ -52,7 +59,9 @@ export const mockUsers: Record<string, User> = {
     name: 'Pedro Martínez',
     phone: '+56 9 6666 7777',
     address: 'Av. La Florida 321',
-    comuna: 'La Florida'
+    comuna: 'La Florida',
+    isSuspended: false,
+    acceptedTerms: true
   },
   'client-5': {
     id: 'client-5',
@@ -61,7 +70,9 @@ export const mockUsers: Record<string, User> = {
     name: 'Laura Fernández',
     phone: '+56 9 8888 9999',
     address: 'Av. Ñuñoa 654',
-    comuna: 'Ñuñoa'
+    comuna: 'Ñuñoa',
+    isSuspended: false,
+    acceptedTerms: true
   },
   // Nuevos clientes para las reservas
   'client-6': {
@@ -71,7 +82,9 @@ export const mockUsers: Record<string, User> = {
     name: 'Jorge Martínez',
     phone: '+56 9 3210 9876',
     address: 'Pedro de Valdivia 123',
-    comuna: 'Providencia'
+    comuna: 'Providencia',
+    isSuspended: false,
+    acceptedTerms: true
   },
   'client-7': {
     id: 'client-7',
@@ -80,7 +93,9 @@ export const mockUsers: Record<string, User> = {
     name: 'Claudia Rojas',
     phone: '+56 9 2109 8765',
     address: 'Av. Apoquindo 4500',
-    comuna: 'Las Condes'
+    comuna: 'Las Condes',
+    isSuspended: false,
+    acceptedTerms: true
   },
   'client-8': {
     id: 'client-8',
@@ -89,7 +104,9 @@ export const mockUsers: Record<string, User> = {
     name: 'Fernando Castro',
     phone: '+56 9 1098 7654',
     address: 'Los Leones 234',
-    comuna: 'Providencia'
+    comuna: 'Providencia',
+    isSuspended: false,
+    acceptedTerms: true
   },
   'client-9': {
     id: 'client-9',
@@ -98,7 +115,9 @@ export const mockUsers: Record<string, User> = {
     name: 'Patricia Navarro',
     phone: '+56 9 0987 6543',
     address: 'Av. Kennedy 9001',
-    comuna: 'Las Condes'
+    comuna: 'Las Condes',
+    isSuspended: false,
+    acceptedTerms: true
   },
   'client-10': {
     id: 'client-10',
@@ -107,7 +126,9 @@ export const mockUsers: Record<string, User> = {
     name: 'Roberto Díaz',
     phone: '+56 9 5432 1098',
     address: 'Av. Vitacura 4456',
-    comuna: 'Vitacura'
+    comuna: 'Vitacura',
+    isSuspended: false,
+    acceptedTerms: true
   },
   'client-11': {
     id: 'client-11',
@@ -116,7 +137,9 @@ export const mockUsers: Record<string, User> = {
     name: 'Elena Morales',
     phone: '+56 9 4321 0987',
     address: 'Los Conquistadores 2100',
-    comuna: 'Pudahuel'
+    comuna: 'Pudahuel',
+    isSuspended: false,
+    acceptedTerms: true
   },
 
   'worker-1': {
@@ -131,7 +154,9 @@ export const mockUsers: Record<string, User> = {
     commercialName: 'CleanPro',
     taxAddress: 'Los Leones 567, Oficina 12',
     taxComuna: 'Providencia',
-    taxEmail: 'facturacion@cleanpro.cl'
+    taxEmail: 'facturacion@cleanpro.cl',
+    isSuspended: false,
+    acceptedTerms: true
   },
   'worker-2': {
     id: 'worker-2',
@@ -145,7 +170,9 @@ export const mockUsers: Record<string, User> = {
     commercialName: 'CleanMaster',
     taxAddress: 'Av. Apoquindo 1234',
     taxComuna: 'Las Condes',
-    taxEmail: 'facturacion@cleanmaster.cl'
+    taxEmail: 'facturacion@cleanmaster.cl',
+    isSuspended: false,
+    acceptedTerms: true
   },
   'worker-3': {
     id: 'worker-3',
@@ -159,7 +186,9 @@ export const mockUsers: Record<string, User> = {
     commercialName: 'SparkleClean',
     taxAddress: 'Av. Vitacura 5678',
     taxComuna: 'Vitacura',
-    taxEmail: 'facturacion@sparkleclean.cl'
+    taxEmail: 'facturacion@sparkleclean.cl',
+    isSuspended: false,
+    acceptedTerms: true
   },
   'worker-4': {
     id: 'worker-4',
@@ -173,7 +202,9 @@ export const mockUsers: Record<string, User> = {
     commercialName: 'FreshHome',
     taxAddress: 'Av. La Florida 987',
     taxComuna: 'La Florida',
-    taxEmail: 'facturacion@freshhome.cl'
+    taxEmail: 'facturacion@freshhome.cl',
+    isSuspended: false,
+    acceptedTerms: true
   },
   'worker-5': {
     id: 'worker-5',
@@ -187,7 +218,9 @@ export const mockUsers: Record<string, User> = {
     commercialName: 'PureClean',
     taxAddress: 'Av. Macul 2345',
     taxComuna: 'Macul',
-    taxEmail: 'facturacion@pureclean.cl'
+    taxEmail: 'facturacion@pureclean.cl',
+    isSuspended: false,
+    acceptedTerms: true
   },
   'worker-6': {
     id: 'worker-6',
@@ -201,7 +234,9 @@ export const mockUsers: Record<string, User> = {
     commercialName: 'CleanTotal',
     taxAddress: 'Av. Independencia 123',
     taxComuna: 'Independencia',
-    taxEmail: 'contacto@cleantotal.cl'
+    taxEmail: 'contacto@cleantotal.cl',
+    isSuspended: false,
+    acceptedTerms: true
   },
   'admin-1': {
     id: 'admin-1',
@@ -210,7 +245,9 @@ export const mockUsers: Record<string, User> = {
     name: 'Administrador CasaLimpia',
     phone: '+56 9 9999 9999',
     address: 'Oficina Central',
-    comuna: 'Santiago'
+    comuna: 'Santiago',
+    isSuspended: false,
+    acceptedTerms: true
   }
 };
 
@@ -236,7 +273,9 @@ export const mockWorkers: WorkerProfile[] = [
     isAvailable: true,
     isPaused: false,
     isApproved: true,
-    approvalDate: '2024-01-15'
+    approvalDate: '2024-01-15',
+    isSuspended: false,
+    acceptedTerms: true
   },
   {
     id: 'worker-2',
@@ -258,7 +297,9 @@ export const mockWorkers: WorkerProfile[] = [
     isAvailable: true,
     isPaused: false,
     isApproved: true,
-    approvalDate: '2024-01-20'
+    approvalDate: '2024-01-20',
+    isSuspended: false,
+    acceptedTerms: true
   },
   {
     id: 'worker-3',
@@ -280,7 +321,9 @@ export const mockWorkers: WorkerProfile[] = [
     isAvailable: true,
     isPaused: false,
     isApproved: true,
-    approvalDate: '2024-01-10'
+    approvalDate: '2024-01-10',
+    isSuspended: false,
+    acceptedTerms: true
   },
   {
     id: 'worker-4',
@@ -302,7 +345,9 @@ export const mockWorkers: WorkerProfile[] = [
     isAvailable: true,
     isPaused: false,
     isApproved: true,
-    approvalDate: '2024-02-01'
+    approvalDate: '2024-02-01',
+    isSuspended: false,
+    acceptedTerms: true
   },
   {
     id: 'worker-5',
@@ -324,7 +369,9 @@ export const mockWorkers: WorkerProfile[] = [
     isAvailable: false,
     isPaused: true,
     isApproved: true,
-    approvalDate: '2024-01-25'
+    approvalDate: '2024-01-25',
+    isSuspended: false,
+    acceptedTerms: true
   },
   {
     id: 'worker-6',
@@ -345,7 +392,9 @@ export const mockWorkers: WorkerProfile[] = [
     reviewCount: 56,
     isAvailable: true,
     isPaused: false,
-    isApproved: false
+    isApproved: false,
+    isSuspended: false,
+    acceptedTerms: true
   }
 ];
 
@@ -395,12 +444,12 @@ export const mockRates: Record<string, ServiceRate[]> = {
   ]
 };
 
-// Reservas mock expandidas con nuevos estados
+// Reservas mock expandidas con nuevos estados (NUESTRAS RESERVAS)
 export const mockBookings: Booking[] = [
   // Reservas ACEPTADAS/CONFIRMADAS (que el trabajador puede cancelar)
   {
     id: 'booking-001',
-    workerId: 'worker-1', // Diego Herrera
+    workerId: 'worker-1',
     clientId: 'client-1',
     serviceType: 'deep_cleaning',
     date: '2025-12-22',
@@ -418,7 +467,7 @@ export const mockBookings: Booking[] = [
   },
   {
     id: 'booking-002',
-    workerId: 'worker-1', // Diego Herrera
+    workerId: 'worker-1',
     clientId: 'client-2',
     serviceType: 'normal',
     date: '2025-12-24',
@@ -435,7 +484,7 @@ export const mockBookings: Booking[] = [
   },
   {
     id: 'booking-003',
-    workerId: 'worker-1', // Diego Herrera
+    workerId: 'worker-1',
     clientId: 'client-3',
     serviceType: 'deep_cleaning',
     date: '2025-12-26',
@@ -564,48 +613,6 @@ export const mockBookings: Booking[] = [
     updatedAt: '2025-11-20T10:00:00Z',
     cancelledBy: 'client',
     cancellationReason: 'Cambio de fecha de mudanza'
-  },
-
-  // Reservas existentes (mantener compatibilidad)
-  {
-    id: 'booking-1',
-    workerId: 'worker-1',
-    clientId: 'client-1',
-    serviceType: 'normal',
-    date: '2024-01-10',
-    timeSlot: { startTime: '09:00', endTime: '12:00', isAvailable: false },
-    price: 15000,
-    status: 'completed',
-    clientNotes: 'Por favor traer productos de limpieza ecológicos',
-    address: 'Av. Providencia 1234',
-    comuna: 'Providencia',
-    createdAt: '2024-01-05'
-  },
-  {
-    id: 'booking-9',
-    workerId: 'worker-1',
-    clientId: 'client-4',
-    serviceType: 'urgent',
-    date: '2024-05-20',
-    timeSlot: { startTime: '15:00', endTime: '18:00', isAvailable: false },
-    price: 20000,
-    status: 'accepted',
-    address: 'Av. La Florida 321',
-    comuna: 'La Florida',
-    createdAt: '2024-05-18'
-  },
-  {
-    id: 'booking-10',
-    workerId: 'worker-2',
-    clientId: 'client-5',
-    serviceType: 'normal',
-    date: '2024-05-25',
-    timeSlot: { startTime: '11:00', endTime: '14:00', isAvailable: false },
-    price: 14000,
-    status: 'pending',
-    address: 'Av. Ñuñoa 654',
-    comuna: 'Ñuñoa',
-    createdAt: '2024-05-22'
   }
 ];
 
@@ -651,24 +658,6 @@ export const mockPayments: Payment[] = [
     date: '2025-11-08',
     status: 'completed',
     method: 'debit_card'
-  },
-
-  // Pagos existentes
-  {
-    id: 'payment-1',
-    bookingId: 'booking-1',
-    amount: 15000,
-    date: '2024-01-10',
-    status: 'completed',
-    method: 'credit_card'
-  },
-  {
-    id: 'payment-9',
-    bookingId: 'booking-9',
-    amount: 20000,
-    date: '2024-05-20',
-    status: 'pending',
-    method: 'credit_card'
   }
 ];
 
@@ -694,27 +683,158 @@ export const mockReviews: Review[] = [
     rating: 4,
     comment: 'Muy buen trabajo, aunque llegó un poco tarde. La limpieza fue impecable.',
     date: '2025-11-12'
-  },
-
-  // Reseñas existentes
-  {
-    id: 'review-1',
-    workerId: 'worker-1',
-    clientId: 'client-1',
-    clientName: 'María González',
-    bookingId: 'booking-1',
-    rating: 5,
-    comment: 'Excelente servicio, muy profesional y puntual. Dejó mi casa impecable!',
-    date: '2024-01-10'
   }
 ];
 
-// Estado global simulado expandido
-export const appState = {
+// Nuevos datos para funcionalidades adicionales
+export const mockRecurringBookings: RecurringBooking[] = [];
+
+export const mockMessages: Message[] = [];
+
+export const mockTerms: TermsAndConditions = {
+  id: 'terms-1',
+  content: `# Términos y Condiciones de CasaLimpia
+
+## 1. Aceptación de los Términos
+Al utilizar CasaLimpia, aceptas estos términos y condiciones en su totalidad.
+
+## 2. Servicios
+CasaLimpia es una plataforma que conecta clientes con trabajadores de limpieza profesionales.
+
+## 3. Responsabilidades del Cliente
+- Proporcionar información precisa
+- Respetar los horarios acordados
+- Mantener un ambiente seguro para el trabajador
+
+## 4. Responsabilidades del Trabajador
+- Brindar servicios de calidad
+- Cumplir con los horarios acordados
+- Respetar la privacidad del cliente
+
+## 5. Pagos y Cancelaciones
+- Los pagos se procesan a través de la plataforma
+- Las cancelaciones deben realizarse con 24 horas de anticipación
+
+## 6. Privacidad
+Respetamos tu privacidad y protegemos tus datos personales según la ley chilena.`,
+  version: '1.0',
+  updatedAt: new Date().toISOString(),
+  updatedBy: 'admin-1',
+};
+
+export const clientFAQs: FAQItem[] = [
+  {
+    id: 'faq-c-1',
+    question: '¿Cómo reservo un servicio de limpieza?',
+    answer: 'Puedes buscar trabajadores disponibles en tu comuna, seleccionar el que prefieras y hacer clic en "Reservar". Luego completa los detalles del servicio y procede al pago.',
+    category: 'Reservas',
+    userType: 'client',
+  },
+  {
+    id: 'faq-c-2',
+    question: '¿Puedo cancelar una reserva?',
+    answer: 'Sí, puedes cancelar una reserva desde tu panel de "Mis Reservas". Te recomendamos hacerlo con al menos 24 horas de anticipación.',
+    category: 'Reservas',
+    userType: 'client',
+  },
+  {
+    id: 'faq-c-3',
+    question: '¿Cómo funcionan las reservas recurrentes?',
+    answer: 'Al hacer una reserva, puedes seleccionar la opción "Limpieza Semanal". El sistema generará automáticamente una reserva cada semana en el mismo día y horario.',
+    category: 'Reservas',
+    userType: 'client',
+  },
+  {
+    id: 'faq-c-4',
+    question: '¿Cómo puedo calificar a un trabajador?',
+    answer: 'Una vez que el servicio esté completado, verás la opción "Calificar" en tu reserva. Puedes dejar una calificación de 1 a 5 estrellas y un comentario opcional.',
+    category: 'Calificaciones',
+    userType: 'client',
+  },
+  {
+    id: 'faq-c-5',
+    question: '¿Cómo me comunico con el trabajador?',
+    answer: 'Una vez que tu reserva sea aceptada, podrás acceder al chat desde los detalles de la reserva para coordinar cualquier detalle específico.',
+    category: 'Comunicación',
+    userType: 'client',
+  },
+  {
+    id: 'faq-c-6',
+    question: '¿Qué métodos de pago aceptan?',
+    answer: 'Aceptamos tarjetas de crédito, débito y transferencias bancarias. El pago se procesa de forma segura a través de nuestra plataforma.',
+    category: 'Pagos',
+    userType: 'client',
+  },
+];
+
+export const workerFAQs: FAQItem[] = [
+  {
+    id: 'faq-w-1',
+    question: '¿Cómo establezco mis tarifas?',
+    answer: 'En la sección "Mis Tarifas" de tu panel, puedes configurar el precio y duración para cada tipo de servicio que ofreces.',
+    category: 'Tarifas',
+    userType: 'worker',
+  },
+  {
+    id: 'faq-w-2',
+    question: '¿Cómo gestiono mi disponibilidad?',
+    answer: 'Ve a "Mi Disponibilidad" y marca en el calendario los días en que estás disponible. También puedes pausar tu disponibilidad temporalmente.',
+    category: 'Disponibilidad',
+    userType: 'worker',
+  },
+  {
+    id: 'faq-w-3',
+    question: '¿Qué hago si no puedo cumplir con una reserva aceptada?',
+    answer: 'Comunícate inmediatamente con el cliente a través del chat y luego cancela la reserva desde tu panel. Intenta evitar cancelaciones para mantener tu reputación.',
+    category: 'Reservas',
+    userType: 'worker',
+  },
+  {
+    id: 'faq-w-4',
+    question: '¿Cuándo recibo mis pagos?',
+    answer: 'Los pagos se procesan después de que el servicio sea marcado como completado. Puedes ver el historial de pagos en "Mis Pagos".',
+    category: 'Pagos',
+    userType: 'worker',
+  },
+  {
+    id: 'faq-w-5',
+    question: '¿Cómo mejoro mi calificación?',
+    answer: 'Brinda un excelente servicio, sé puntual, mantén comunicación con tus clientes y respeta los detalles acordados. Las buenas reseñas mejorarán tu visibilidad.',
+    category: 'Calificaciones',
+    userType: 'worker',
+  },
+  {
+    id: 'faq-w-6',
+    question: '¿Puedo rechazar una reserva?',
+    answer: 'Sí, puedes rechazar reservas desde tu panel de "Mis Reservas". Sin embargo, hacerlo frecuentemente puede afectar tu reputación en la plataforma.',
+    category: 'Reservas',
+    userType: 'worker',
+  },
+];
+
+// Estado global simulado
+export const appState: {
+  users: Record<string, User>;
+  workers: WorkerProfile[];
+  rates: Record<string, ServiceRate[]>;
+  bookings: Booking[];
+  reviews: Review[];
+  payments: Payment[];
+  recurringBookings: RecurringBooking[];
+  messages: Message[];
+  terms: TermsAndConditions;
+  clientFAQs: FAQItem[];
+  workerFAQs: FAQItem[];
+} = {
   users: { ...mockUsers },
   workers: [...mockWorkers],
   rates: { ...mockRates },
   bookings: [...mockBookings],
   reviews: [...mockReviews],
-  payments: [...mockPayments]
+  payments: [...mockPayments],
+  recurringBookings: [...mockRecurringBookings],
+  messages: [...mockMessages],
+  terms: mockTerms,
+  clientFAQs,
+  workerFAQs,
 };
